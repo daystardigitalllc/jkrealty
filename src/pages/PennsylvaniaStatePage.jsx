@@ -95,12 +95,20 @@ export default function PennsylvaniaStatePage({ onOpenListingModal, onOpenValuat
           <h3 className="text-2xl font-serif font-bold">
             Planning to Buy or Sell in Pennsylvania?
           </h3>
-          <button
-            onClick={onOpenValuationModal}
-            className="px-6 py-3 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider shadow-glow transition-all"
-          >
-            Get PA Property Consultation
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <button
+              onClick={() => onOpenContactModal('Pennsylvania Office')}
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-xs uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all"
+            >
+              Contact PA Advisory Office
+            </button>
+            <button
+              onClick={onOpenValuationModal}
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-xs uppercase tracking-wider backdrop-blur-md transition-all"
+            >
+              Pennsylvania Home Valuation
+            </button>
+          </div>
         </div>
       </section>
 

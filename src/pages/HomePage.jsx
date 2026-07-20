@@ -274,10 +274,10 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
                   Meet All 5 Team Agents
                 </button>
                 <button
-                  onClick={() => setCurrentPage('contact')}
-                  className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs uppercase tracking-wider transition-all"
+                  onClick={() => onOpenContactModal('Greenville Office')}
+                  className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs uppercase tracking-[0.15em] transition-all"
                 >
-                  Contact Our Office
+                  Contact Greenville Office
                 </button>
               </div>
             </div>

@@ -144,21 +144,21 @@ export default function AgentsPage({ onOpenValuationModal }) {
                 </div>
 
                 {/* Contact info */}
-                <div className="pt-4 border-t border-slate-100 space-y-2 text-xs">
-                  <a
+                <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                  <a 
                     href={`tel:${agent.phone.replace(/[^0-9]/g, '')}`}
-                    className="flex items-center gap-2 text-slate-700 hover:text-bahamas-600 font-bold transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 hover:text-bahamas-600 transition-colors"
                   >
                     <Phone className="w-3.5 h-3.5 text-bahamas-500" />
-                    {agent.phone}
+                    <span>{agent.phone}</span>
                   </a>
-                  <a
-                    href={`mailto:${agent.email}`}
-                    className="flex items-center gap-2 text-slate-500 hover:text-bahamas-600 transition-colors truncate"
+                  <button
+                    onClick={() => onOpenContactModal(agent.name)}
+                    className="px-4 py-2.5 rounded-xl bg-navy-900 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5"
                   >
-                    <Mail className="w-3.5 h-3.5 text-bahamas-500 shrink-0" />
-                    {agent.email}
-                  </a>
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Contact {agent.name.split(' ')[0]}</span>
+                  </button>
                 </div>
               </div>
 

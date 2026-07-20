@@ -71,12 +71,20 @@ export default function FloridaStatePage({ onOpenListingModal, onOpenValuationMo
             <p className="text-xs text-bahamas-50 leading-relaxed">
               Whether searching for an oceanfront condominium in Palm Beach or a private estate in Naples, our team ensures your Florida purchase is handled with absolute precision.
             </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <button
+              onClick={() => onOpenContactModal('Florida Beach Office')}
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-xs uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all"
+            >
+              Contact FL Beach Advisory Office
+            </button>
             <button
               onClick={onOpenValuationModal}
-              className="w-full py-2.5 rounded-xl bg-white text-bahamas-800 font-bold text-xs uppercase tracking-wider shadow-md hover:bg-bahamas-50 transition-colors"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-xs uppercase tracking-wider backdrop-blur-md transition-all"
             >
-              Schedule Florida Beach Consultation
+              Florida Home Valuation
             </button>
+          </div>
           </div>
         </div>
       </section>

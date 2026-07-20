@@ -87,30 +87,30 @@ export default function Footer({ setCurrentPage, onOpenValuationModal }) {
             <h4 className="text-sm font-bold uppercase tracking-wider text-bahamas-400 mb-4">
               Site Links
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-xs text-slate-300">
               <li>
-                <button onClick={() => navigateTo('home')} className="text-slate-300 hover:text-bahamas-300 transition-colors">
+                <button onClick={() => setCurrentPage('home')} className="hover:text-bahamas-300 transition-colors">
                   Home Overview
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('listings')} className="text-slate-300 hover:text-bahamas-300 transition-colors">
-                  Featured Properties
+                <button onClick={() => setCurrentPage('listings')} className="hover:text-bahamas-300 transition-colors">
+                  Properties & Listings
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('about')} className="text-slate-300 hover:text-bahamas-300 transition-colors">
-                  Who We Are
+                <button onClick={() => onOpenListingModal('house')} className="hover:text-bahamas-300 transition-colors">
+                  RealScout MLS Search
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('agents')} className="text-slate-300 hover:text-bahamas-300 transition-colors">
-                  Our Team & Staff
+                <button onClick={onOpenValuationModal} className="hover:text-bahamas-300 transition-colors font-bold text-bahamas-400">
+                  Instant Home Valuation
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('contact')} className="text-slate-300 hover:text-bahamas-300 transition-colors">
-                  Contact Jeff Kralovec
+                <button onClick={() => onOpenContactModal('Footer Link')} className="hover:text-bahamas-300 transition-colors">
+                  General Contact & Advisory
                 </button>
               </li>
             </ul>

@@ -41,24 +41,23 @@ export default function ListingsPage({ onOpenListingModal, onOpenValuationModal 
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
               Don't See What You're Looking For?
             </h2>
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <p className="text-slate-400 text-sm leading-relaxed">
               Properties in Delaware, PA, and Florida move quickly. Jeff Kralovec's team has access to off-market pocket listings, coming-soon inventory, and custom RealScout automated alerts.
             </p>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
-            <a
-              href="tel:2678580914"
-              className="w-full py-3.5 px-4 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider text-center shadow-glow transition-all flex items-center justify-center gap-2"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <button
+              onClick={() => onOpenContactModal('Listing Advisory')}
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-xs uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all"
             >
-              <Phone className="w-4 h-4" />
-              Call (267) 858-0914
-            </a>
+              Inquire About Listings
+            </button>
             <button
               onClick={onOpenValuationModal}
-              className="w-full py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-bahamas-700 text-white font-bold text-xs uppercase tracking-wider text-center transition-colors"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-xs uppercase tracking-wider backdrop-blur-md transition-all"
             >
-              Request Custom Property Search
+              Request Home Valuation
             </button>
           </div>
         </div>

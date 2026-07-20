@@ -159,13 +159,29 @@ export default function AboutPage({ setCurrentPage, onOpenValuationModal }) {
           </div>
 
           <div className="pt-4">
-            <button
-              onClick={() => setCurrentPage('agents')}
-              className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-2"
-            >
-              View Individual Agent Bios
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <button
+                onClick={() => onOpenContactModal()}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-xs uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all"
+              >
+                Contact Our Advisory Office
+              </button>
+              <button
+                onClick={onOpenValuationModal}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-slate-300 font-bold text-xs uppercase tracking-wider transition-all"
+              >
+                Request Home Valuation
+              </button>
+            </div>
+            <div className="mt-8">
+              <button
+                onClick={() => setCurrentPage('agents')}
+                className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-2"
+              >
+                View Individual Agent Bios
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </section>

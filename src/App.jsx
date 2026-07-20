@@ -1,210 +1,157 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import PropertyModal from './components/PropertyModal';
+import ListingModal from './components/PropertyModal';
 import ValuationModal from './components/ValuationModal';
-import MobileBottomBar from './components/MobileBottomBar';
+import ContactModal from './components/ContactModal';
 
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import AgentsPage from './pages/AgentsPage';
-import ListingsPage from './pages/ListingsPage';
 import DelawareStatePage from './pages/DelawareStatePage';
 import PennsylvaniaStatePage from './pages/PennsylvaniaStatePage';
 import FloridaStatePage from './pages/FloridaStatePage';
+import AgentsPage from './pages/AgentsPage';
+import AboutPage from './pages/AboutPage';
+import ListingsPage from './pages/ListingsPage';
 import ContactPage from './pages/ContactPage';
 
 export default function App() {
-  const getPageFromPath = (path) => {
-    switch (path.toLowerCase().replace(/\/$/, '')) {
-      case '/about':
-        return 'about';
-      case '/agents':
-        return 'agents';
-      case '/listings':
-      case '/properties':
-        return 'listings';
-      case '/delaware':
-      case '/de':
-        return 'delaware';
-      case '/pennsylvania':
-      case '/pa':
-        return 'pennsylvania';
-      case '/florida':
-      case '/fl':
-        return 'florida';
-      case '/contact':
-        return 'contact';
-      default:
-        return 'home';
-    }
-  };
-
-  const getPathFromPage = (page) => {
-    switch (page) {
-      case 'about':
-        return '/about';
-      case 'agents':
-        return '/agents';
-      case 'listings':
-        return '/listings';
-      case 'delaware':
-        return '/delaware';
-      case 'pennsylvania':
-        return '/pennsylvania';
-      case 'florida':
-        return '/florida';
-      case 'contact':
-        return '/contact';
-      default:
-        return '/';
-    }
-  };
-
-  const [currentPage, setCurrentPageState] = useState(() => getPageFromPath(window.location.pathname));
+  const [currentPage, setCurrentPage] = useState('home');
   const [listingModalOpen, setListingModalOpen] = useState(false);
-  const [listingModalType, setListingModalType] = useState('house');
+  const [listingType, setListingType] = useState('SFR,MF,TC,LAL,MOBILE,OTHER');
   const [valuationModalOpen, setValuationModalOpen] = useState(false);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [selectedAgentName, setSelectedAgentName] = useState(null);
 
-  const setCurrentPage = (pageId) => {
-    setCurrentPageState(pageId);
-    const targetPath = getPathFromPage(pageId);
-    if (window.location.pathname !== targetPath) {
-      window.history.pushState({ pageId }, '', targetPath);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPageState(getPageFromPath(window.location.pathname));
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  const handleOpenListingModal = (type = 'house') => {
-    setListingModalType(type);
+  const handleOpenListingModal = (type = 'SFR,MF,TC,LAL,MOBILE,OTHER') => {
+    let code = 'SFR,MF,TC,LAL,MOBILE,OTHER';
+    if (type === 'house') code = 'SFR';
+    if (type === 'condo') code = 'TC,MF';
+    if (type === 'mf') code = 'MF';
+    setListingType(code);
     setListingModalOpen(true);
-  };
-
-  const handleCloseListingModal = () => {
-    setListingModalOpen(false);
   };
 
   const handleOpenValuationModal = () => {
     setValuationModalOpen(true);
   };
 
-  const handleCloseValuationModal = () => {
-    setValuationModalOpen(false);
+  const handleOpenContactModal = (agentName = null) => {
+    setSelectedAgentName(agentName);
+    setContactModalOpen(true);
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
         return (
-          <HomePage
+          <HomePage 
             setCurrentPage={setCurrentPage}
             onOpenListingModal={handleOpenListingModal}
             onOpenValuationModal={handleOpenValuationModal}
-          />
-        );
-      case 'about':
-        return (
-          <AboutPage
-            setCurrentPage={setCurrentPage}
-            onOpenValuationModal={handleOpenValuationModal}
-          />
-        );
-      case 'agents':
-        return (
-          <AgentsPage
-            onOpenValuationModal={handleOpenValuationModal}
-          />
-        );
-      case 'listings':
-        return (
-          <ListingsPage
-            onOpenListingModal={handleOpenListingModal}
-            onOpenValuationModal={handleOpenValuationModal}
+            onOpenContactModal={handleOpenContactModal}
           />
         );
       case 'delaware':
         return (
-          <DelawareStatePage
+          <DelawareStatePage 
+            setCurrentPage={setCurrentPage}
             onOpenListingModal={handleOpenListingModal}
             onOpenValuationModal={handleOpenValuationModal}
+            onOpenContactModal={handleOpenContactModal}
           />
         );
       case 'pennsylvania':
         return (
-          <PennsylvaniaStatePage
+          <PennsylvaniaStatePage 
+            setCurrentPage={setCurrentPage}
             onOpenListingModal={handleOpenListingModal}
             onOpenValuationModal={handleOpenValuationModal}
+            onOpenContactModal={handleOpenContactModal}
           />
         );
       case 'florida':
         return (
-          <FloridaStatePage
-            onOpenListingModal={handleOpenListingModal}
-            onOpenValuationModal={handleOpenValuationModal}
-          />
-        );
-      case 'contact':
-        return (
-          <ContactPage
-            onOpenValuationModal={handleOpenValuationModal}
-          />
-        );
-      default:
-        return (
-          <HomePage
+          <FloridaStatePage 
             setCurrentPage={setCurrentPage}
             onOpenListingModal={handleOpenListingModal}
             onOpenValuationModal={handleOpenValuationModal}
+            onOpenContactModal={handleOpenContactModal}
+          />
+        );
+      case 'agents':
+        return (
+          <AgentsPage 
+            setCurrentPage={setCurrentPage}
+            onOpenContactModal={handleOpenContactModal}
+          />
+        );
+      case 'about':
+        return (
+          <AboutPage 
+            setCurrentPage={setCurrentPage}
+            onOpenValuationModal={handleOpenValuationModal}
+            onOpenContactModal={handleOpenContactModal}
+          />
+        );
+      case 'listings':
+        return (
+          <ListingsPage 
+            onOpenListingModal={handleOpenListingModal}
+            onOpenValuationModal={handleOpenValuationModal}
+            onOpenContactModal={handleOpenContactModal}
+          />
+        );
+      case 'contact':
+        return <ContactPage setCurrentPage={setCurrentPage} />;
+      default:
+        return (
+          <HomePage 
+            setCurrentPage={setCurrentPage}
+            onOpenListingModal={handleOpenListingModal}
+            onOpenValuationModal={handleOpenValuationModal}
+            onOpenContactModal={handleOpenContactModal}
           />
         );
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-bahamas-500 selection:text-white pb-16 md:pb-0">
-      {/* Header */}
-      <Header
-        currentPage={currentPage}
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col selection:bg-bahamas-500 selection:text-white">
+      <Header 
+        currentPage={currentPage} 
         setCurrentPage={setCurrentPage}
         onOpenListingModal={handleOpenListingModal}
         onOpenValuationModal={handleOpenValuationModal}
+        onOpenContactModal={handleOpenContactModal}
       />
 
-      {/* Main Page Body */}
-      <main className="flex-1">
+      <main className="flex-grow">
         {renderPage()}
       </main>
 
-      {/* Footer */}
-      <Footer
+      <Footer 
         setCurrentPage={setCurrentPage}
+        onOpenListingModal={handleOpenListingModal}
         onOpenValuationModal={handleOpenValuationModal}
+        onOpenContactModal={handleOpenContactModal}
       />
 
-      {/* Floating Mobile Bottom Quick Action Bar */}
-      <MobileBottomBar
-        onOpenValuationModal={handleOpenValuationModal}
+      {/* Modals */}
+      <ListingModal 
+        isOpen={listingModalOpen} 
+        onClose={() => setListingModalOpen(false)} 
+        initialPropertyType={listingType}
       />
 
-      {/* Pop-up Modals */}
-      <PropertyModal
-        isOpen={listingModalOpen}
-        onClose={handleCloseListingModal}
-        initialType={listingModalType}
+      <ValuationModal 
+        isOpen={valuationModalOpen} 
+        onClose={() => setValuationModalOpen(false)} 
       />
 
-      <ValuationModal
-        isOpen={valuationModalOpen}
-        onClose={handleCloseValuationModal}
+      <ContactModal 
+        isOpen={contactModalOpen} 
+        onClose={() => setContactModalOpen(false)}
+        agentName={selectedAgentName}
       />
     </div>
   );
