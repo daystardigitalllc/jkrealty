@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom Glassmorphism & Luxury Elements */
+.glass-header {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 163, 224, 0.12);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 163, 224, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(0, 55, 78, 0.07);
+}
+
+.glass-card-dark {
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 163, 224, 0.25);
+}
+
+.bg-bahamas-gradient {
+  background: linear-gradient(135deg, #00A3E0 0%, #006C96 100%);
+}
+
+.bg-bahamas-light-gradient {
+  background: linear-gradient(180deg, #F0FBFC 0%, #FFFFFF 100%);
+}
+
+.text-gradient-bahamas {
+  background: linear-gradient(135deg, #00A3E0 0%, #005172 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom RealScout component wrapper overrides */
+realscout-office-listings {
+  display: block;
+  width: 100%;
+  min-height: 450px;
+}
+
+/* Custom Modal Animation */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-modal {
+  animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide scrollbar for clean horizontal tab sliders */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
