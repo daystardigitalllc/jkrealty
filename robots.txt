@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daystardigitalllc.github.io/jkrealty/sitemap.xml
