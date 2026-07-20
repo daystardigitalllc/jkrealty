@@ -21,134 +21,89 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Hero Copy */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bahamas-500/20 border border-bahamas-400/40 text-bahamas-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
-                <Sparkles className="w-3.5 h-3.5 text-bahamas-400" />
-                Premier Tri-State Luxury Group • DE • PA • FL
+          <div className="max-w-3xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bahamas-500/20 border border-bahamas-400/40 text-bahamas-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-bahamas-400" />
+              Premier Tri-State Luxury Group • DE • PA • FL
+            </div>
+
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-[1.15] text-white">
+              Luxury Coastal & Tri-State Real Estate <br />
+              <span className="text-gradient-bahamas bg-clip-text text-transparent bg-gradient-to-r from-bahamas-300 via-bahamas-400 to-white">
+                Designed Around You.
+              </span>
+            </h1>
+
+            <p className="text-slate-200 text-sm sm:text-lg leading-relaxed max-w-2xl font-light">
+              The <strong>Jeff Kralovec Realty Group</strong> delivers seamless, high-value real estate solutions across Delaware, Pennsylvania, and Florida. From over-asking home sales to coastal waterfront properties.
+            </p>
+
+            {/* Quick Search Action Pill Bar */}
+            <div className="bg-navy-950/80 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20 shadow-2xl max-w-xl space-y-3">
+              <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-bahamas-300 px-1 flex items-center justify-between">
+                <span>Browse Listings by Category</span>
+                <span className="text-[10px] text-slate-400">Powered by RealScout</span>
               </div>
-
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-[1.15] text-white">
-                Luxury Coastal & Tri-State Real Estate <br />
-                <span className="text-gradient-bahamas bg-clip-text text-transparent bg-gradient-to-r from-bahamas-300 via-bahamas-400 to-white">
-                  Designed Around You.
-                </span>
-              </h1>
-
-              <p className="text-slate-200 text-sm sm:text-lg leading-relaxed max-w-2xl font-light">
-                The <strong>Jeff Kralovec Realty Group</strong> delivers seamless, high-value real estate solutions across Delaware, Pennsylvania, and Florida. From over-asking home sales to coastal waterfront properties.
-              </p>
-
-              {/* Quick Search Action Pill Bar */}
-              <div className="bg-navy-950/80 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20 shadow-2xl max-w-xl space-y-3">
-                <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-bahamas-300 px-1 flex items-center justify-between">
-                  <span>Browse Listings by Category</span>
-                  <span className="text-[10px] text-slate-400">Powered by RealScout</span>
-                </div>
-                
-                <div className="grid grid-cols-3 gap-2">
-                  <button
-                    id="btn-house"
-                    onClick={() => onOpenListingModal('house')}
-                    className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
-                  >
-                    <Home className="w-4 h-4 text-bahamas-500" />
-                    <span>Single Family</span>
-                  </button>
-
-                  <button
-                    id="btn-condo"
-                    onClick={() => onOpenListingModal('condo')}
-                    className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
-                  >
-                    <Building2 className="w-4 h-4 text-bahamas-500" />
-                    <span>Condos & Towns</span>
-                  </button>
-
-                  <button
-                    id="btn-mf"
-                    onClick={() => onOpenListingModal('mf')}
-                    className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
-                  >
-                    <Layers className="w-4 h-4 text-bahamas-500" />
-                    <span>Multi-Family</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Hero CTA Buttons - Side by Side on Mobile */}
-              <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-1 max-w-xl">
+              
+              <div className="grid grid-cols-3 gap-2">
                 <button
-                  onClick={() => setCurrentPage('listings')}
-                  className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all flex items-center justify-center gap-1 sm:gap-2 text-center"
+                  id="btn-house"
+                  onClick={() => onOpenListingModal('house')}
+                  className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
                 >
-                  <span className="truncate">Explore Listings</span>
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <Home className="w-4 h-4 text-bahamas-500" />
+                  <span>Single Family</span>
                 </button>
 
                 <button
-                  onClick={onOpenValuationModal}
-                  className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-[11px] sm:text-sm uppercase tracking-wider transition-all backdrop-blur-md text-center flex items-center justify-center"
+                  id="btn-condo"
+                  onClick={() => onOpenListingModal('condo')}
+                  className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
                 >
-                  <span className="truncate">Home Valuation</span>
+                  <Building2 className="w-4 h-4 text-bahamas-500" />
+                  <span>Condos & Towns</span>
+                </button>
+
+                <button
+                  id="btn-mf"
+                  onClick={() => onOpenListingModal('mf')}
+                  className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
+                >
+                  <Layers className="w-4 h-4 text-bahamas-500" />
+                  <span>Multi-Family</span>
                 </button>
               </div>
-
-              {/* Trust Badges */}
-              <div className="pt-2 flex items-center gap-6 text-xs text-slate-300">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-bahamas-400" />
-                  Over-Asking Price Track Record
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-bahamas-400" />
-                  Advanced RealScout MLS Tech
-                </span>
-              </div>
             </div>
 
-            {/* Team Image Card Spotlight (Replacing solo photo with Team Focus) */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md rounded-3xl overflow-hidden shadow-2xl border-2 border-bahamas-400/30 group">
-                <img
-                  src="/images/jkrg-group-photo.jpg"
-                  alt="Jeff Kralovec Realty Group Team"
-                  className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                
-                {/* Overlay Card */}
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/40 to-transparent flex flex-col justify-end p-5">
-                  <div className="glass-card-dark p-4 rounded-2xl border border-bahamas-500/40 text-white space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold uppercase tracking-wider text-bahamas-300">
-                        Our Team
-                      </span>
-                      <span className="bg-bahamas-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                        5 REALTORS®
-                      </span>
-                    </div>
-                    <h3 className="font-serif font-bold text-lg text-white">
-                      The JKRG Realty Team
-                    </h3>
-                    <p className="text-xs text-slate-300">
-                      Dedicated real estate professionals specializing in Delaware, Pennsylvania, and Florida properties.
-                    </p>
-                    <div className="pt-1 flex items-center justify-between text-xs text-bahamas-300 font-medium">
-                      <span>(267) 858-0914</span>
-                      <button 
-                        onClick={() => setCurrentPage('agents')}
-                        className="underline hover:text-white font-bold"
-                      >
-                        Meet The Team →
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Hero CTA Buttons - Side by Side on Mobile */}
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-1 max-w-xl">
+              <button
+                onClick={() => setCurrentPage('listings')}
+                className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all flex items-center justify-center gap-1 sm:gap-2 text-center"
+              >
+                <span className="truncate">Explore Listings</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              </button>
+
+              <button
+                onClick={onOpenValuationModal}
+                className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-[11px] sm:text-sm uppercase tracking-wider transition-all backdrop-blur-md text-center flex items-center justify-center"
+              >
+                <span className="truncate">Home Valuation</span>
+              </button>
             </div>
 
+            {/* Trust Badges */}
+            <div className="pt-2 flex items-center gap-6 text-xs text-slate-300">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-bahamas-400" />
+                Over-Asking Price Track Record
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-bahamas-400" />
+                Advanced RealScout MLS Tech
+              </span>
+            </div>
           </div>
         </div>
       </section>
