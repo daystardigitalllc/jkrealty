@@ -1,8 +1,26 @@
 import React from 'react';
 import { MapPin, Phone, CheckCircle2, Sparkles, Home, Building2, ArrowRight } from 'lucide-react';
 import RealScoutWidget from '../components/RealScoutWidget';
+import SEO from '../components/SEO';
 
 export default function DelawareStatePage({ onOpenListingModal, onOpenValuationModal }) {
+  const deSchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Jeff Kralovec Realty Group - Delaware Office",
+    "url": "https://daystardigitalllc.github.io/jkrealty/#/delaware",
+    "telephone": "+1-267-858-0914",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3701 Kennett Pike",
+      "addressLocality": "Greenville",
+      "addressRegion": "DE",
+      "postalCode": "19807",
+      "addressCountry": "US"
+    },
+    "areaServed": ["Greenville", "Wilmington", "Triangle", "Claymont", "Rehoboth Beach", "Lewes", "New Castle County", "Sussex County"]
+  };
+
   const deMarkets = [
     { name: "Greenville", type: "Luxury Estates & Greenville Office HQ", zip: "19807" },
     { name: "Wilmington & Triangle", type: "Historic & Suburban Homes", zip: "19802 / 19806" },
@@ -13,6 +31,12 @@ export default function DelawareStatePage({ onOpenListingModal, onOpenValuationM
 
   return (
     <div className="space-y-16 pb-16">
+      <SEO 
+        title="Delaware Luxury Real Estate & Homes for Sale"
+        description="Explore luxury homes, coastal retreats, and premier real estate for sale in Greenville, Wilmington, Rehoboth Beach, and Lewes, Delaware with Jeff Kralovec Realty Group."
+        canonicalUrl="https://daystardigitalllc.github.io/jkrealty/#/delaware"
+        jsonLd={deSchema}
+      />
       
       {/* Hero Header */}
       <section className="bg-gradient-to-b from-navy-900 via-bahamas-950 to-navy-900 text-white py-16 sm:py-20 relative overflow-hidden">

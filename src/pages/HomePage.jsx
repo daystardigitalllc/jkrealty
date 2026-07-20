@@ -3,10 +3,16 @@ import { Home, Building2, Layers, Sparkles, ArrowRight, ShieldCheck, MapPin, Pho
 import RealScoutWidget from '../components/RealScoutWidget';
 import Testimonials from '../components/Testimonials';
 import StatsSection from '../components/StatsSection';
+import SEO, { organizationSchema } from '../components/SEO';
 
 export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal }) {
   return (
     <div className="space-y-16 pb-16">
+      <SEO 
+        title="Luxury Real Estate in DE, PA & FL"
+        description="Jeff Kralovec Realty Group - Premier real estate team serving Delaware, Pennsylvania, and Florida. Specializing in luxury homes, coastal properties, and record-setting sales."
+        jsonLd={organizationSchema}
+      />
       {/* Hero Section with Luxury Architecture Background */}
       <section className="relative bg-navy-900 text-white pt-12 pb-20 overflow-hidden min-h-[580px] flex items-center">
         {/* Background Image with Dark Bahamas Overlay */}
