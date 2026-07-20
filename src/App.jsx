@@ -192,7 +192,6 @@ export default function App() {
 
       {/* Floating Mobile Bottom Quick Action Bar */}
       <MobileBottomBar
-        onOpenListingModal={handleOpenListingModal}
         onOpenValuationModal={handleOpenValuationModal}
       />
 
