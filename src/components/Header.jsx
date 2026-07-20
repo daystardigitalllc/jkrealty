@@ -52,23 +52,23 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
         {/* Brand Logo */}
         <button 
           onClick={() => handleNavClick('home')}
-          className="flex items-center gap-2 sm:gap-3 group focus:outline-none text-left shrink-0 min-w-0"
+          className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none text-left shrink-0 min-w-0"
         >
           <img 
             src="/logo.svg" 
             alt="J. Kralovec Realty Group" 
-            className="h-8 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <div className="flex flex-col">
-            <span className="text-slate-950 font-cormorant font-normal text-xl sm:text-3xl tracking-[0.15em] sm:tracking-[0.18em] leading-none uppercase truncate">
+            <span className="text-slate-950 font-serif font-bold text-base sm:text-xl tracking-tight leading-none">
               J Kralovec
             </span>
-            <span className="text-[8px] sm:text-[9px] text-slate-600 font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase mt-0.5 sm:mt-1 truncate">
+            <span className="text-[8px] sm:text-[9.5px] text-slate-500 font-semibold tracking-[0.18em] uppercase mt-0.5 sm:mt-1">
               REALTY GROUP
             </span>
-            <div className="flex items-center gap-1 mt-0.5 text-slate-500">
+            <div className="flex items-center gap-1 mt-0.5">
               <Compass className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-800 shrink-0" />
-              <span className="text-[7px] sm:text-[8px] font-bold tracking-[0.2em] uppercase text-slate-700">
+              <span className="text-[7px] sm:text-[8px] font-bold tracking-[0.18em] uppercase text-slate-700">
                 COMPASS
               </span>
             </div>
@@ -202,7 +202,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
             )}
           </div>
 
-          {/* 3. DEVELOPMENTS & MARKETS DROPDOWN */}
+          {/* 3. LOCATIONS DROPDOWN */}
           <div 
             className="relative"
             onMouseEnter={() => setActiveDropdown('markets')}
@@ -216,14 +216,14 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
                   : 'text-slate-950 hover:text-bahamas-600'
               }`}
             >
-              Developments & Markets
+              Locations
               <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'markets' ? 'rotate-180 text-bahamas-600' : 'text-slate-400'}`} />
             </button>
 
             {activeDropdown === 'markets' && (
               <div className="absolute left-0 mt-1 w-72 bg-white rounded-2xl p-3 shadow-2xl border border-slate-200/90 z-50 animate-modal">
                 <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 px-3 py-1.5 border-b border-slate-100">
-                  Regional Premier Markets
+                  Regional Premier Locations
                 </div>
                 <div className="space-y-1 pt-1.5">
                   <button
@@ -412,13 +412,13 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
               )}
             </div>
 
-            {/* Developments & Markets Accordion */}
+            {/* Locations Accordion */}
             <div className="bg-slate-50 rounded-xl overflow-hidden">
               <button
                 onClick={() => toggleMobileAccordion('markets')}
                 className="w-full px-4 py-3 text-xs font-bold uppercase tracking-wider text-slate-900 flex justify-between items-center"
               >
-                <span>Developments & Markets</span>
+                <span>Locations</span>
                 <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${mobileExpanded.markets ? 'rotate-180' : ''}`} />
               </button>
               {mobileExpanded.markets && (
