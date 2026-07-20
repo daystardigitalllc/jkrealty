@@ -34,6 +34,7 @@ export default {
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
         display: ['"Cinzel"', 'serif'],
+        cormorant: ['"Cormorant Garamond"', 'serif'],
       },
       boxShadow: {
         'glow': '0 0 25px -5px rgba(0, 163, 224, 0.3)',
