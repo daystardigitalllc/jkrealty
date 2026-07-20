@@ -3,7 +3,7 @@ import { MapPin, Phone, CheckCircle2, Sparkles, Home, Building2, ArrowRight } fr
 import RealScoutWidget from '../components/RealScoutWidget';
 import SEO from '../components/SEO';
 
-export default function DelawareStatePage({ onOpenListingModal, onOpenValuationModal }) {
+export default function DelawareStatePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
   const deSchema = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",

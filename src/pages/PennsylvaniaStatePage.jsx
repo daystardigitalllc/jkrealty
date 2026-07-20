@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, CheckCircle2, Sparkles, Home, Building2 } from 'lucide-react';
 import RealScoutWidget from '../components/RealScoutWidget';
 
-export default function PennsylvaniaStatePage({ onOpenListingModal, onOpenValuationModal }) {
+export default function PennsylvaniaStatePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
   const paMarkets = [
     { name: "Greater Philadelphia", detail: "Center City, Rittenhouse, & Metro Neighborhoods" },
     { name: "The Main Line", detail: "Bryn Mawr, Wayne, Villanova & Gladwyne" },

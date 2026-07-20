@@ -5,7 +5,7 @@ import Testimonials from '../components/Testimonials';
 import StatsSection from '../components/StatsSection';
 import SEO, { organizationSchema } from '../components/SEO';
 
-export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal }) {
+export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
   return (
     <div className="space-y-16 pb-16">
       <SEO 

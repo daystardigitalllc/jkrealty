@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, CheckCircle2, Sparkles, Sun, Waves, Compass } from 'lucide-react';
 import RealScoutWidget from '../components/RealScoutWidget';
 
-export default function FloridaStatePage({ onOpenListingModal, onOpenValuationModal }) {
+export default function FloridaStatePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
   const flMarkets = [
     { name: "Palm Beach & West Palm", detail: "Luxury Estates, Intracoastal Villas & Oceanfront Living" },
     { name: "Naples & Marco Island", detail: "Gulf Coast Beachfront Residences & Golf Club Communities" },

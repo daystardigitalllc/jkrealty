@@ -2,7 +2,7 @@ import React from 'react';
 import { Home, Sparkles, Filter, Phone, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 import RealScoutWidget from '../components/RealScoutWidget';
 
-export default function ListingsPage({ onOpenListingModal, onOpenValuationModal }) {
+export default function ListingsPage({ onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
   return (
     <div className="space-y-16 pb-16">
       

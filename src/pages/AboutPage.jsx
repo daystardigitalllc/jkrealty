@@ -2,7 +2,7 @@ import React from 'react';
 import { Award, Heart, Shield, Sparkles, CheckCircle2, Phone, Mail, ArrowRight } from 'lucide-react';
 import StatsSection from '../components/StatsSection';
 
-export default function AboutPage({ setCurrentPage, onOpenValuationModal }) {
+export default function AboutPage({ setCurrentPage, onOpenValuationModal, onOpenContactModal }) {
   return (
     <div className="space-y-16 pb-16">
       
