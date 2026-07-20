@@ -30,13 +30,13 @@ export default function Footer({ setCurrentPage, onOpenValuationModal }) {
                   J. KRALOVEC
                 </h3>
                 <p className="text-xs text-bahamas-400 font-semibold tracking-widest uppercase">
-                  REALTY GROUP • COMPASS
+                  REALTY GROUP
                 </p>
               </div>
             </div>
 
             <p className="text-slate-400 text-sm leading-relaxed max-w-md">
-              Elevating real estate in Delaware, Pennsylvania, and Florida. Backed by Compass technology, deep local market expertise, and record-setting sales strategies.
+              Elevating real estate in Delaware, Pennsylvania, and Florida with deep local market expertise, innovative property technology, and record-setting sales strategies.
             </p>
 
             {/* Social Media Links */}
@@ -179,12 +179,12 @@ export default function Footer({ setCurrentPage, onOpenValuationModal }) {
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-bahamas-400" />
             <span>
-              © {currentYear} J. Kralovec Realty Group | Compass. All Rights Reserved. Equal Housing Opportunity.
+              © {currentYear} J. Kralovec Realty Group. All Rights Reserved. Equal Housing Opportunity.
             </span>
           </div>
 
           <div className="flex items-center gap-6">
-            <span>Powered by Compass RealScout Integration</span>
+            <span>Powered by RealScout Integration</span>
             <span className="text-slate-600">•</span>
             <span>Delaware, Pennsylvania & Florida Licensed</span>
           </div>

@@ -20,7 +20,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bahamas-500/20 border border-bahamas-400/40 text-bahamas-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
                 <Sparkles className="w-3.5 h-3.5 text-bahamas-400" />
-                Premier Compass Luxury Group • DE • PA • FL
+                Premier Tri-State Luxury Group • DE • PA • FL
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-[1.15] text-white">
@@ -97,7 +97,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-bahamas-400" />
-                  Compass Network Tech
+                  Advanced RealScout MLS Tech
                 </span>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
                         Lead REALTOR®
                       </span>
                       <span className="bg-bahamas-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        COMPASS
+                        JKRG
                       </span>
                     </div>
                     <h3 className="font-serif font-bold text-xl text-white">

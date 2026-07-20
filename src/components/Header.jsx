@@ -33,7 +33,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           <div className="flex items-center gap-4 text-slate-300">
             <span className="flex items-center gap-1.5 font-medium text-bahamas-300">
               <Sparkles className="w-3.5 h-3.5 text-bahamas-400 animate-pulse" />
-              Compass Tri-State Group: DE • PA • FL
+              Jeff Kralovec Realty Group: DE • PA • FL
             </span>
             <span className="hidden md:inline text-slate-600">|</span>
             <span className="hidden md:inline-flex items-center gap-1 text-slate-300">
@@ -69,11 +69,11 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
             className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <div className="hidden sm:block border-l border-slate-200 pl-3">
-            <span className="bg-slate-900 text-white text-[10px] uppercase tracking-widest font-bold px-2 py-0.5 rounded border border-slate-700 block text-center">
-              COMPASS
+            <span className="text-slate-900 font-serif font-bold text-xs uppercase tracking-widest block">
+              J. KRALOVEC
             </span>
             <span className="text-[10px] text-bahamas-600 font-bold tracking-widest uppercase block mt-0.5">
-              TRI-STATE GROUP
+              REALTY GROUP
             </span>
           </div>
         </button>

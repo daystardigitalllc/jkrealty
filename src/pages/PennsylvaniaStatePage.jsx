@@ -45,7 +45,7 @@ export default function PennsylvaniaStatePage({ onOpenListingModal, onOpenValuat
             <ul className="space-y-2 text-xs font-medium text-slate-700">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-bahamas-500" />
-                Licensed PA REALTOR® representation backed by Compass network tools
+                Licensed PA REALTOR® representation backed by advanced market tools
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-bahamas-500" />

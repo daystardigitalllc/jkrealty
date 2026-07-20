@@ -16,7 +16,7 @@ export default function AgentsPage({ onOpenValuationModal }) {
         "Over $45M+ Total Sales Volume",
         "10+ Years of Real Estate Experience"
       ],
-      bio: "Jeff is the founder and team leader of the Jeff Kralovec Realty Group at Compass. Known for over-asking sales and fast market turnaround, Jeff oversees client operations in Delaware, Pennsylvania, and Florida."
+      bio: "Jeff is the founder and team leader of the Jeff Kralovec Realty Group. Known for over-asking sales and fast market turnaround, Jeff oversees client operations in Delaware, Pennsylvania, and Florida."
     },
     {
       id: 2,
@@ -57,7 +57,7 @@ export default function AgentsPage({ onOpenValuationModal }) {
       phone: "(267) 858-0914",
       email: "penny.zebrook@compass.com",
       highlights: [
-        "REALTOR® at Compass since 2020",
+        "Licensed REALTOR® since 2020",
         "Deep local knowledge of New Castle County",
         "15+ years of real estate experience"
       ],

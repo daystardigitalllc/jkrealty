@@ -54,7 +54,7 @@ export default function ContactPage({ onOpenValuationModal }) {
                     Greenville HQ Office
                   </h3>
                   <p className="text-xs text-bahamas-600 font-semibold uppercase">
-                    Jeff Kralovec Realty Group • Compass
+                    Jeff Kralovec Realty Group
                   </p>
                 </div>
               </div>

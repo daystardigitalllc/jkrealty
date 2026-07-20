@@ -89,7 +89,7 @@ export default function AboutPage({ setCurrentPage, onOpenValuationModal }) {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-bahamas-400 shrink-0 mt-0.5" />
-                  <span><strong>Compass Technology Integration:</strong> Utilizing AI-powered market analytics & RealScout MLS syndication.</span>
+                  <span><strong>Advanced Market Tech Integration:</strong> Utilizing AI-powered market analytics & RealScout MLS syndication.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-bahamas-400 shrink-0 mt-0.5" />
@@ -102,7 +102,7 @@ export default function AboutPage({ setCurrentPage, onOpenValuationModal }) {
               </ul>
 
               <blockquote className="p-4 rounded-2xl bg-bahamas-900/50 border-l-4 border-bahamas-400 text-sm text-bahamas-100 italic leading-relaxed">
-                "As a proud member of Compass and leader of Tri-State Group / JKRG, Jeff has 10+ years of experience helping homeowners and clients across every step of buying and selling, whether in Delaware, Pennsylvania, or Florida."
+                "As leader of Tri-State Group / JKRG, Jeff has 10+ years of experience helping homeowners and clients across every step of buying and selling, whether in Delaware, Pennsylvania, or Florida."
               </blockquote>
 
               <div className="pt-2 flex flex-wrap items-center gap-4">

@@ -42,7 +42,7 @@ export default function ListingsPage({ onOpenListingModal, onOpenValuationModal 
               Don't See What You're Looking For?
             </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
-              Properties in Delaware, PA, and Florida move quickly. Jeff Kralovec's team has access to off-market pocket listings, upcoming Compass coming-soon inventory, and custom RealScout automated alerts.
+              Properties in Delaware, PA, and Florida move quickly. Jeff Kralovec's team has access to off-market pocket listings, coming-soon inventory, and custom RealScout automated alerts.
             </p>
           </div>
 
