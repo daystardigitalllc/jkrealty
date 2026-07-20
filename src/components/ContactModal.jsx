@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { X, Send, Phone, Mail, MapPin, CheckCircle2, MessageSquare } from 'lucide-react';
+import { X, Send, Phone, Mail, CheckCircle2, MessageSquare, Loader2 } from 'lucide-react';
 
 export default function ContactModal({ isOpen, onClose, agentName = null }) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,13 +16,59 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const agentEmails = {
+    "JEFF KRALOVEC": "jeff.kralovec@compass.com",
+    "CHARON HARRIS": "charon.harris@compass.com",
+    "AUSTIN ZEBROOK": "austin.zebrook@compass.com",
+    "PENNY ZEBROOK": "penny.zebrook@compass.com",
+    "BETH ANN KRALOVEC": "bethann.kralovec@compass.com",
+  };
+
+  const targetAgentEmail = agentName ? (agentEmails[agentName.toUpperCase()] || 'jeff.kralovec@compass.com') : 'jeff.kralovec@compass.com';
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "bf3ddb61-aeb5-4cba-b9d2-d795f8e2c32f",
+          subject: agentName ? `New Website Lead for ${agentName}` : `New General Website Lead (${formData.topic})`,
+          from_name: "JKRG Realty Website",
+          target_agent: agentName || "General Office",
+          agent_email: targetAgentEmail,
+          client_name: formData.name,
+          client_email: formData.email,
+          client_phone: formData.phone,
+          topic: formData.topic,
+          preferred_state: formData.preferredState,
+          message: formData.message
+        })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setError('There was an issue sending your message. Please try again or call us directly.');
+      }
+    } catch (err) {
+      setError('Connection error. Please check your internet connection or call (267) 858-0914.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setError('');
     setFormData({
       name: '',
       email: '',
@@ -51,10 +99,10 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
               <CheckCircle2 className="w-10 h-10" />
             </div>
             <h3 className="text-2xl font-serif font-bold text-slate-900">
-              Message Received!
+              Message Delivered!
             </h3>
             <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-              Thank you for reaching out to <strong>Jeff Kralovec Realty Group</strong>. A member of our team will contact you shortly.
+              Your inquiry has been routed to {agentName ? <strong>{agentName}</strong> : <strong>our advisory team</strong>}. We will contact you shortly.
             </p>
             <button
               onClick={handleReset}
@@ -68,7 +116,7 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-bahamas-50 border border-bahamas-200 text-bahamas-700 text-[11px] font-bold uppercase tracking-wider mb-2">
                 <MessageSquare className="w-3.5 h-3.5 text-bahamas-500" />
-                General Contact & Inquiry
+                {agentName ? `Direct Message to ${agentName}` : 'General Contact & Inquiry'}
               </div>
               <h3 className="text-2xl font-serif font-bold text-slate-900">
                 {agentName ? `Contact ${agentName}` : 'Get In Touch With Our Office'}
@@ -77,6 +125,12 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
                 Have a question or looking to buy/invest? Send us a message and our advisors will assist you.
               </p>
             </div>
+
+            {error && (
+              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold">
+                {error}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -172,10 +226,20 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider shadow-glow-subtle transition-all flex items-center justify-center gap-2"
+                disabled={loading}
+                className="w-full py-3.5 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 disabled:opacity-50 text-white font-bold text-xs uppercase tracking-wider shadow-glow-subtle transition-all flex items-center justify-center gap-2"
               >
-                <Send className="w-4 h-4" />
-                Submit General Inquiry
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Sending Inquiry...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Submit {agentName ? `Inquiry for ${agentName}` : 'General Inquiry'}</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
