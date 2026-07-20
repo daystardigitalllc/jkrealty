@@ -13,7 +13,7 @@ export default function AgentsPage({ setCurrentPage, onOpenContactModal, onOpenV
       email: "jeff.kralovec@compass.com",
       highlights: [
         "Greater Wilmington & Tri-State Top Real Estate Agent",
-        "Over $45M+ Total Sales Volume",
+        "Over $250M+ Total Sales Volume",
         "10+ Years of Real Estate Experience"
       ],
       bio: "Jeff is the founder and team leader of the Jeff Kralovec Realty Group. Known for over-asking sales and fast market turnaround, Jeff oversees client operations in Delaware, Pennsylvania, and Florida."

@@ -12,7 +12,7 @@ export default function StatsSection() {
     },
     {
       id: 2,
-      value: "$45M+",
+      value: "$250M+",
       label: "Total Sales Volume",
       description: "Record-setting luxury & residential sales",
       icon: TrendingUp

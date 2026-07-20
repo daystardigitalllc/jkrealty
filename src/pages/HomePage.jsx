@@ -102,8 +102,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
               className="w-full py-3.5 sm:py-4 px-3 sm:px-6 bg-slate-900/60 hover:bg-slate-900/80 active:bg-slate-950 text-white border border-white/30 font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl backdrop-blur-md transition-all flex items-center justify-center gap-1.5 sm:gap-2 text-center whitespace-nowrap min-h-[48px] sm:min-h-[52px]"
             >
               <Phone className="w-4 h-4 text-bahamas-400 shrink-0" />
-              <span className="hidden sm:inline">Call (267) 858-0914</span>
-              <span className="sm:hidden">Call Jeff</span>
+              <span>Speak to an Agent</span>
             </a>
           </div>
 
@@ -176,7 +175,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
               <div className="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between min-h-[200px]">
                 <div>
                   <h3 className="text-4xl sm:text-5xl font-serif font-bold text-slate-900">
-                    $45M+
+                    $250M+
                   </h3>
                 </div>
                 <div className="pt-6 border-t border-slate-100 text-[10px] font-bold uppercase tracking-widest text-slate-400">

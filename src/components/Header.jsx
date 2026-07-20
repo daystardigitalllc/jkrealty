@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Menu, X, ChevronDown, Sparkles, Building, Home, ArrowRight, ShieldCheck, UserCheck } from 'lucide-react';
+import { Phone, Menu, X, ChevronDown, Sparkles, Building, Home, ArrowRight, ShieldCheck, UserCheck, Compass } from 'lucide-react';
 
 export default function Header({ currentPage, setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -66,6 +66,12 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
             <span className="text-[8px] sm:text-[9px] text-slate-600 font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase mt-0.5 sm:mt-1 truncate">
               REALTY GROUP
             </span>
+            <div className="flex items-center gap-1 mt-0.5 text-slate-500">
+              <Compass className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-800 shrink-0" />
+              <span className="text-[7px] sm:text-[8px] font-bold tracking-[0.2em] uppercase text-slate-700">
+                COMPASS
+              </span>
+            </div>
           </div>
         </button>
 
@@ -180,7 +186,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
                     onClick={() => handleNavClick('about')}
                     className="w-full text-left px-3.5 py-2 rounded-xl hover:bg-bahamas-50 text-slate-800 transition-all group"
                   >
-                    <div className="text-xs font-bold group-hover:text-bahamas-600">Track Record ($45M+ Volume)</div>
+                    <div className="text-xs font-bold group-hover:text-bahamas-600">Track Record ($250M+ Volume)</div>
                     <div className="text-[11px] text-slate-500">Off-market & record-setting results</div>
                   </button>
 

@@ -85,7 +85,7 @@ export default function AboutPage({ setCurrentPage, onOpenValuationModal, onOpen
               <ul className="space-y-3 text-slate-300 text-sm">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-bahamas-400 shrink-0 mt-0.5" />
-                  <span><strong>Leader of Tri-State Group / JKRG:</strong> Over $45M+ in career sales volume across DE, PA & FL.</span>
+                  <span><strong>Leader of Tri-State Group / JKRG:</strong> Over $250M+ in career sales volume across DE, PA & FL.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-bahamas-400 shrink-0 mt-0.5" />
