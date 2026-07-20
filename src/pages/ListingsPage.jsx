@@ -48,7 +48,7 @@ export default function ListingsPage({ onOpenListingModal, onOpenValuationModal,
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <button
-              onClick={() => onOpenContactModal('Listing Advisory')}
+              onClick={() => onOpenContactModal()}
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-xs uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all"
             >
               Inquire About Listings

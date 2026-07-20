@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, Phone, Mail, CheckCircle2, MessageSquare, Loader2 } from 'lucide-react';
+import { X, Send, CheckCircle2, MessageSquare, Loader2 } from 'lucide-react';
 
 export default function ContactModal({ isOpen, onClose, agentName = null }) {
   const [submitted, setSubmitted] = useState(false);
@@ -24,7 +24,9 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
     "BETH ANN KRALOVEC": "bethann.kralovec@compass.com",
   };
 
-  const targetAgentEmail = agentName ? (agentEmails[agentName.toUpperCase()] || 'jeff.kralovec@compass.com') : 'jeff.kralovec@compass.com';
+  const isRealAgent = Boolean(agentName && agentEmails[agentName.toUpperCase()]);
+  const displayAgentName = isRealAgent ? agentName : null;
+  const targetAgentEmail = displayAgentName ? agentEmails[displayAgentName.toUpperCase()] : 'jeff.kralovec@compass.com';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,9 +42,9 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
         },
         body: JSON.stringify({
           access_key: "bf3ddb61-aeb5-4cba-b9d2-d795f8e2c32f",
-          subject: agentName ? `New Website Lead for ${agentName}` : `New General Website Lead (${formData.topic})`,
+          subject: displayAgentName ? `New Website Lead for ${displayAgentName}` : `New General Website Lead (${formData.topic})`,
           from_name: "JKRG Realty Website",
-          target_agent: agentName || "General Office",
+          target_agent: displayAgentName || "General Advisory Desk",
           agent_email: targetAgentEmail,
           client_name: formData.name,
           client_email: formData.email,
@@ -57,7 +59,7 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
       if (result.success) {
         setSubmitted(true);
       } else {
-        setError('There was an issue sending your message. Please try again or call us directly.');
+        setError('There was an issue sending your message. Please try again or call us directly at (267) 858-0914.');
       }
     } catch (err) {
       setError('Connection error. Please check your internet connection or call (267) 858-0914.');
@@ -101,8 +103,8 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
             <h3 className="text-2xl font-serif font-bold text-slate-900">
               Message Delivered!
             </h3>
-            <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-              Your inquiry has been routed to {agentName ? <strong>{agentName}</strong> : <strong>our advisory team</strong>}. We will contact you shortly.
+            <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed font-light">
+              Your inquiry has been routed to {displayAgentName ? <strong>{displayAgentName}</strong> : <strong>our advisory team</strong>}. We will contact you shortly.
             </p>
             <button
               onClick={handleReset}
@@ -116,13 +118,13 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-bahamas-50 border border-bahamas-200 text-bahamas-700 text-[11px] font-bold uppercase tracking-wider mb-2">
                 <MessageSquare className="w-3.5 h-3.5 text-bahamas-500" />
-                {agentName ? `Direct Message to ${agentName}` : 'General Contact & Inquiry'}
+                {displayAgentName ? `Direct Message to ${displayAgentName}` : 'General Contact & Advisory'}
               </div>
               <h3 className="text-2xl font-serif font-bold text-slate-900">
-                {agentName ? `Contact ${agentName}` : 'Get In Touch With Our Office'}
+                {displayAgentName ? `Contact ${displayAgentName}` : 'Get In Touch With Our Team'}
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm">
-                Have a question or looking to buy/invest? Send us a message and our advisors will assist you.
+              <p className="text-slate-600 text-xs sm:text-sm font-light">
+                Have a question or looking to buy, sell, or invest? Send us a message and our team will assist you promptly.
               </p>
             </div>
 
@@ -227,7 +229,7 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 disabled:opacity-50 text-white font-bold text-xs uppercase tracking-wider shadow-glow-subtle transition-all flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 disabled:opacity-50 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>
@@ -237,7 +239,7 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>Submit {agentName ? `Inquiry for ${agentName}` : 'General Inquiry'}</span>
+                    <span>{displayAgentName ? `Submit Inquiry to ${displayAgentName}` : 'Submit Inquiry'}</span>
                   </>
                 )}
               </button>

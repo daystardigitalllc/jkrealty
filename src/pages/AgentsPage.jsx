@@ -178,7 +178,7 @@ export default function AgentsPage({ setCurrentPage, onOpenContactModal, onOpenV
           </p>
           <div className="pt-2">
             <button
-              onClick={() => onOpenContactModal('Free Consultation')}
+              onClick={() => onOpenContactModal()}
               className="px-8 py-3.5 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider shadow-glow transition-all"
             >
               Get Free Home Consultation

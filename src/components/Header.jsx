@@ -162,7 +162,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
         {/* Right CTA Inquire Button */}
         <div className="hidden lg:flex items-center gap-3">
           <button
-            onClick={() => onOpenContactModal('Inquire Header')}
+            onClick={() => onOpenContactModal()}
             className="px-6 py-2.5 rounded-lg bg-bahamas-500 hover:bg-bahamas-600 text-white font-semibold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Inquire
@@ -172,7 +172,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
         {/* Mobile menu button */}
         <div className="flex items-center gap-2 lg:hidden">
           <button
-            onClick={() => onOpenContactModal('Inquire Mobile')}
+            onClick={() => onOpenContactModal()}
             className="px-4 py-2 rounded-lg bg-bahamas-500 text-white font-semibold text-xs uppercase tracking-wider mr-1"
           >
             Inquire

@@ -499,7 +499,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <button
-                onClick={() => onOpenContactModal('CTA Banner Consultation')}
+                onClick={() => onOpenContactModal()}
                 className="w-full sm:w-auto px-8 py-3.5 bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md"
               >
                 BOOK A CONSULTATION

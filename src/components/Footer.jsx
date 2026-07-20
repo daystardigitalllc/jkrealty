@@ -46,14 +46,14 @@ export default function Footer({ setCurrentPage, onOpenValuationModal, onOpenCon
             {/* Social Icons */}
             <div className="flex items-center gap-2 pt-2 text-slate-400">
               <button 
-                onClick={() => onOpenContactModal('Share Footer')}
+                onClick={() => onOpenContactModal()}
                 className="w-8 h-8 rounded-full border border-slate-200 hover:border-bahamas-500 hover:text-bahamas-600 flex items-center justify-center transition-colors"
                 aria-label="Share"
               >
                 <Share2 className="w-4 h-4" />
               </button>
               <button 
-                onClick={() => onOpenContactModal('Subscribe Footer')}
+                onClick={() => onOpenContactModal()}
                 className="w-8 h-8 rounded-full border border-slate-200 hover:border-bahamas-500 hover:text-bahamas-600 flex items-center justify-center transition-colors"
                 aria-label="Notifications"
               >
@@ -120,7 +120,7 @@ export default function Footer({ setCurrentPage, onOpenValuationModal, onOpenCon
                 </button>
               </li>
               <li>
-                <button onClick={() => onOpenContactModal('Concierge Services')} className="hover:text-bahamas-600 transition-colors">
+                <button onClick={() => onOpenContactModal()} className="hover:text-bahamas-600 transition-colors">
                   Concierge Advisory Services
                 </button>
               </li>
