@@ -142,18 +142,18 @@ export default function AboutPage({ setCurrentPage, onOpenValuationModal }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-white p-2">
               <img
                 src="/images/jkrg-group-photo.jpg"
                 alt="JKRG Team Group Photo"
-                className="w-full h-72 object-cover"
+                className="w-full h-auto max-h-80 object-contain rounded-xl"
               />
             </div>
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-white p-2">
               <img
                 src="/images/jkrg-photo.png"
                 alt="JKRG Office Team"
-                className="w-full h-72 object-cover object-top"
+                className="w-full h-auto max-h-80 object-contain rounded-xl"
               />
             </div>
           </div>

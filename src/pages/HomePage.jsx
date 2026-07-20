@@ -277,16 +277,15 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
             </div>
 
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative rounded-2xl overflow-hidden border-2 border-bahamas-400/40 shadow-glow max-w-sm">
+              <div className="relative rounded-2xl overflow-hidden border-2 border-bahamas-400/40 shadow-glow w-full max-w-md bg-white p-1.5">
                 <img
                   src="/images/jkrg-group-photo.jpg"
                   alt="Jeff Kralovec Realty Group Team"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-auto max-h-[300px] sm:max-h-[340px] object-contain rounded-xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-transparent to-transparent flex items-end p-4">
-                  <span className="text-xs font-bold text-white">
-                    The Jeff Kralovec Realty Group (JKRG)
-                  </span>
+                <div className="absolute bottom-3 left-3 right-3 bg-navy-900/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-bahamas-500/30 flex items-center justify-between text-xs text-white font-bold">
+                  <span>The Jeff Kralovec Realty Group (JKRG)</span>
+                  <span className="text-bahamas-300 text-[10px] uppercase font-bold">5 REALTORS®</span>
                 </div>
               </div>
             </div>
