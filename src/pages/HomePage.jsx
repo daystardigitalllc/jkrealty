@@ -114,7 +114,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
       {/* ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <RealScoutWidget 
-          initialPropertyType={selectedPropertyType}
+          initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
         />
       </section>
 
