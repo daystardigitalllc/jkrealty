@@ -148,6 +148,17 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           </button>
 
           <button
+            onClick={() => handleNavClick('agents')}
+            className={`px-3.5 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 ${
+              currentPage === 'agents'
+                ? 'text-bahamas-600 font-bold border-b-2 border-bahamas-500'
+                : 'text-slate-700 hover:text-bahamas-600'
+            }`}
+          >
+            Agents
+          </button>
+
+          <button
             onClick={() => handleNavClick('contact')}
             className={`px-3.5 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 ${
               currentPage === 'contact'
@@ -214,6 +225,12 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
               className="px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-left bg-slate-50 text-slate-900"
             >
               About
+            </button>
+            <button
+              onClick={() => handleNavClick('agents')}
+              className="px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-left bg-slate-50 text-slate-900"
+            >
+              Agents
             </button>
             <button
               onClick={() => handleNavClick('contact')}

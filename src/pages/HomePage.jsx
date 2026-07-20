@@ -171,142 +171,13 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. CURATED COLLECTION / EXCLUSIVE NEW LISTINGS                            */}
+      {/* 2. REALSCOUT LIVE MLS FEED INTEGRATION                                   */}
       {/* ========================================================================= */}
-      <section className="py-20 bg-slate-50/60 border-b border-slate-200/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-bahamas-600 block mb-2">
-                CURATED COLLECTION
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-medium text-slate-900">
-                Exclusive New Listings
-              </h2>
-            </div>
-
-            <button
-              onClick={() => setCurrentPage('listings')}
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-bahamas-600 transition-colors group"
-            >
-              <span>View All Properties</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-bahamas-500" />
-            </button>
-          </div>
-
-          {/* 3 Luxury Property Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* Property 1 */}
-            <div 
-              onClick={() => onOpenListingModal('house')}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 flex flex-col justify-between"
-            >
-              <div>
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80" 
-                    alt="The Azure Pavilion" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-slate-900 rounded-md shadow-sm">
-                      NEW LISTING
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
-                    The Azure Pavilion
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-1 font-medium">
-                    Greenville, Delaware
-                  </p>
-                </div>
-              </div>
-
-              <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>5 BD • 6 BA • 10,200 SQ FT</span>
-                <span className="font-bold text-slate-900 text-sm">$2,850,000</span>
-              </div>
-            </div>
-
-            {/* Property 2 */}
-            <div 
-              onClick={() => onOpenListingModal('house')}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 flex flex-col justify-between"
-            >
-              <div>
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" 
-                    alt="Veridian Main Line Estates" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-slate-900 rounded-md shadow-sm">
-                      FEATURED
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
-                    Veridian Main Line Estate
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-1 font-medium">
-                    Bryn Mawr, Pennsylvania
-                  </p>
-                </div>
-              </div>
-
-              <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>6 BD • 7 BA • 11,500 SQ FT</span>
-                <span className="font-bold text-slate-900 text-sm">$3,950,000</span>
-              </div>
-            </div>
-
-            {/* Property 3 */}
-            <div 
-              onClick={() => onOpenListingModal('condo')}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 flex flex-col justify-between"
-            >
-              <div>
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                  <img 
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" 
-                    alt="The Reef Penthouse" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-slate-900 rounded-md shadow-sm">
-                      WATERFRONT
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
-                    The Reef Beachfront Penthouse
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-1 font-medium">
-                    Palm Beach, Florida
-                  </p>
-                </div>
-              </div>
-
-              <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>4 BD • 4.5 BA • 7,800 SQ FT</span>
-                <span className="font-bold text-slate-900 text-sm">$8,200,000</span>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <RealScoutWidget 
+          initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
+          title="Explore Live Tri-State MLS Listings"
+        />
       </section>
 
       {/* ========================================================================= */}
@@ -514,16 +385,6 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
             </div>
           </div>
         </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 6. REALSCOUT LIVE MLS FEED INTEGRATION                                   */}
-      {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <RealScoutWidget 
-          initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
-          title="Explore Live Tri-State MLS Listings"
-        />
       </section>
     </div>
   );

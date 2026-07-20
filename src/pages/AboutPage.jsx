@@ -168,7 +168,7 @@ export default function AboutPage({ setCurrentPage, onOpenValuationModal, onOpen
               </button>
               <button
                 onClick={onOpenValuationModal}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-slate-300 font-bold text-xs uppercase tracking-wider transition-all"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300 font-bold text-xs uppercase tracking-wider transition-all"
               >
                 Request Home Valuation
               </button>
