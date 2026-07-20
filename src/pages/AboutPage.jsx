@@ -105,19 +105,19 @@ export default function AboutPage({ setCurrentPage, onOpenValuationModal }) {
                 "As leader of Tri-State Group / JKRG, Jeff has 10+ years of experience helping homeowners and clients across every step of buying and selling, whether in Delaware, Pennsylvania, or Florida."
               </blockquote>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-2">
                 <a
                   href="tel:2678580914"
-                  className="px-6 py-3 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider shadow-glow transition-all flex items-center gap-2"
+                  className="w-full py-3 px-2 sm:px-6 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-[11px] sm:text-xs uppercase tracking-wider shadow-glow transition-all flex items-center justify-center gap-1.5 text-center"
                 >
-                  <Phone className="w-4 h-4" />
-                  Direct: (267) 858-0914
+                  <Phone className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">Call Office</span>
                 </a>
                 <button
                   onClick={onOpenValuationModal}
-                  className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs uppercase tracking-wider transition-all"
+                  className="w-full py-3 px-2 sm:px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all text-center flex items-center justify-center"
                 >
-                  Get Home Valuation
+                  <span className="truncate">Home Valuation</span>
                 </button>
               </div>
             </div>

@@ -71,21 +71,21 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
                 </div>
               </div>
 
-              {/* Hero CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              {/* Hero CTA Buttons - Side by Side on Mobile */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-2">
                 <button
                   onClick={() => setCurrentPage('listings')}
-                  className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-sm uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all flex items-center gap-2"
+                  className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all flex items-center justify-center gap-1 sm:gap-2 text-center"
                 >
-                  Explore All Listings
-                  <ArrowRight className="w-4 h-4" />
+                  <span className="truncate">Explore Listings</span>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                 </button>
 
                 <button
                   onClick={onOpenValuationModal}
-                  className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-sm uppercase tracking-wider transition-all backdrop-blur-md"
+                  className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-[11px] sm:text-sm uppercase tracking-wider transition-all backdrop-blur-md text-center flex items-center justify-center"
                 >
-                  Instant Home Valuation
+                  <span className="truncate">Home Valuation</span>
                 </button>
               </div>
 
