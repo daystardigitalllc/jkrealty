@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import { 
-  MapPin, Home, Building2, Layers, Tag, Search, ArrowRight, 
-  ShieldCheck, CheckCircle2, ChevronLeft, ChevronRight, Award, Key, Sparkles 
+  Phone, Search, ArrowRight, ShieldCheck, ChevronLeft, ChevronRight, Key, Sparkles 
 } from 'lucide-react';
 import RealScoutWidget from '../components/RealScoutWidget';
 import SEO, { organizationSchema } from '../components/SEO';
 
 export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
-  // Hero Floating Filter State
-  const [selectedLocation, setSelectedLocation] = useState('DE');
-  const [selectedPropertyType, setSelectedPropertyType] = useState('SFR,MF,TC,LAL,MOBILE,OTHER');
-  const [selectedPriceRange, setSelectedPriceRange] = useState('500k-5m');
-
   // Testimonial Carousel State
   const reviews = [
     {
@@ -90,85 +84,26 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
             Delivering premier luxury & coastal real estate solutions across Delaware, Pennsylvania, and Florida.
           </p>
 
-          {/* Floating Search Filter Bar */}
-          <div className="w-full max-w-5xl mt-12 bg-white text-slate-800 rounded-2xl shadow-2xl p-3 sm:p-4 border border-slate-100 backdrop-blur-md">
-            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-2 items-center">
-              
-              {/* Filter 1: Location */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/60 text-left">
-                <div className="p-2 rounded-lg bg-bahamas-50 text-bahamas-600 shrink-0">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div className="flex flex-col w-full">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    LOCATION
-                  </span>
-                  <select 
-                    value={selectedLocation}
-                    onChange={(e) => setSelectedLocation(e.target.value)}
-                    className="bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer w-full"
-                  >
-                    <option value="DE">Delaware (Greenville, Wilmington, Beaches)</option>
-                    <option value="PA">Pennsylvania (Philly, Main Line)</option>
-                    <option value="FL">Florida (Palm Beach, Coastal)</option>
-                    <option value="ALL">All Tri-State & Coastal</option>
-                  </select>
-                </div>
-              </div>
+          {/* Hero Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 w-full max-w-lg">
+            <button
+              onClick={() => {
+                const el = document.getElementById('mls-listings');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full sm:w-auto px-8 py-4 bg-bahamas-500 hover:bg-bahamas-600 active:bg-bahamas-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 min-h-[52px]"
+            >
+              <Search className="w-4 h-4" />
+              <span>Search Listings</span>
+            </button>
 
-              {/* Filter 2: Property Type */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/60 text-left">
-                <div className="p-2 rounded-lg bg-bahamas-50 text-bahamas-600 shrink-0">
-                  <Home className="w-5 h-5" />
-                </div>
-                <div className="flex flex-col w-full">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    PROPERTY TYPE
-                  </span>
-                  <select 
-                    value={selectedPropertyType}
-                    onChange={(e) => setSelectedPropertyType(e.target.value)}
-                    className="bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer w-full"
-                  >
-                    <option value="SFR,MF,TC,LAL,MOBILE,OTHER">All Property Types</option>
-                    <option value="SFR">Single Family Residence</option>
-                    <option value="TC,MF">Condos & Townhomes</option>
-                    <option value="MF">Multi-Family Estates</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Filter 3: Price Range */}
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/60 text-left">
-                <div className="p-2 rounded-lg bg-bahamas-50 text-bahamas-600 shrink-0">
-                  <Tag className="w-5 h-5" />
-                </div>
-                <div className="flex flex-col w-full">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    PRICE RANGE
-                  </span>
-                  <select 
-                    value={selectedPriceRange}
-                    onChange={(e) => setSelectedPriceRange(e.target.value)}
-                    className="bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer w-full"
-                  >
-                    <option value="500k-5m">$500k - $2.5M</option>
-                    <option value="2.5m-10m">$2.5M - $10M+</option>
-                    <option value="any">Any Price Range</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Search Button */}
-              <button
-                type="submit"
-                className="w-full h-full min-h-[52px] py-3 px-6 bg-bahamas-600 hover:bg-bahamas-700 active:bg-bahamas-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-              >
-                <span>Search</span>
-                <Search className="w-4 h-4" />
-              </button>
-
-            </form>
+            <a
+              href="tel:2678580914"
+              className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white border border-white/30 font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl backdrop-blur-md transition-all flex items-center justify-center gap-2 min-h-[52px]"
+            >
+              <Phone className="w-4 h-4 text-bahamas-400" />
+              <span>Call Jeff (267) 858-0914</span>
+            </a>
           </div>
 
         </div>
