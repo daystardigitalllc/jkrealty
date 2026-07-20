@@ -38,7 +38,7 @@ export default function AgentsPage({ onOpenValuationModal }) {
       name: "AUSTIN ZEBROOK",
       role: "REALTOR®",
       license: "Licensed REALTOR®",
-      photo: "/images/450594470_10220311267211744_2598742644170641413_n.jpg",
+      photo: "/images/115547401_10163857001600032_6156952302831591604_n.jpg",
       phone: "(267) 858-0914",
       email: "austin.zebrook@compass.com",
       highlights: [
@@ -68,7 +68,7 @@ export default function AgentsPage({ onOpenValuationModal }) {
       name: "BETH ANN KRALOVEC",
       role: "REALTOR®",
       license: "Licensed in PA & FL",
-      photo: "/images/115547401_10163857001600032_6156952302831591604_n.jpg",
+      photo: "/images/450594470_10220311267211744_2598742644170641413_n.jpg",
       phone: "(267) 858-0914",
       email: "bethann.kralovec@compass.com",
       highlights: [
