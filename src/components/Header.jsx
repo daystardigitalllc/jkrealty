@@ -20,48 +20,50 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300 shadow-sm">
       {/* Top Luxury Announcement Bar */}
-      <div className="bg-navy-950 text-white text-[11px] py-2 px-4 border-b border-bahamas-500/20">
+      <div className="bg-navy-950 text-white text-[11px] py-1.5 px-3 sm:px-4 border-b border-bahamas-500/20 overflow-hidden">
         <div className="max-w-7xl mx-auto flex justify-between items-center gap-2">
-          <div className="flex items-center gap-2 text-slate-300 truncate">
-            <span className="flex items-center gap-1 font-medium text-bahamas-300 truncate">
-              <Sparkles className="w-3.5 h-3.5 text-bahamas-400 shrink-0" />
-              <span className="truncate tracking-wider text-[10px] uppercase font-semibold">
-                J Kralovec Realty Group • Delaware • Pennsylvania • Florida
-              </span>
+          {/* Left Text */}
+          <div className="flex items-center gap-1.5 text-slate-300 min-w-0">
+            <Sparkles className="w-3 h-3 text-bahamas-400 shrink-0" />
+            <span className="hidden md:inline tracking-wider text-[10px] uppercase font-semibold text-bahamas-300 truncate">
+              J Kralovec Realty Group • Delaware • Pennsylvania • Florida
+            </span>
+            <span className="md:hidden tracking-wider text-[10px] uppercase font-semibold text-bahamas-300 truncate">
+              J Kralovec Realty Group
             </span>
           </div>
 
-          <div className="flex items-center gap-4 shrink-0 text-xs">
+          {/* Right Phone Link */}
+          <div className="flex items-center shrink-0">
             <a 
               href="tel:2678580914" 
-              className="flex items-center gap-1.5 hover:text-bahamas-300 transition-colors font-medium text-slate-200"
+              className="flex items-center gap-1 hover:text-bahamas-300 transition-colors font-medium text-slate-200 text-[11px] sm:text-xs"
             >
-              <Phone className="w-3.5 h-3.5 text-bahamas-400" />
-              <span className="hidden sm:inline font-mono">(267) 858-0914</span>
-              <span className="sm:hidden font-mono">Call</span>
+              <Phone className="w-3 h-3 text-bahamas-400 shrink-0" />
+              <span className="font-mono text-[11px] sm:text-xs">(267) 858-0914</span>
             </a>
           </div>
         </div>
       </div>
 
       {/* Main Douglas Elliman-Style Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
         
         {/* Brand Logo */}
         <button 
           onClick={() => handleNavClick('home')}
-          className="flex items-center gap-3 group focus:outline-none text-left shrink-0"
+          className="flex items-center gap-2 sm:gap-3 group focus:outline-none text-left shrink-0 min-w-0"
         >
           <img 
             src="/logo.svg" 
             alt="J. Kralovec Realty Group" 
-            className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-8 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <div className="flex flex-col">
-            <span className="text-slate-950 font-cormorant font-normal text-2xl sm:text-3xl tracking-[0.18em] leading-none uppercase">
+            <span className="text-slate-950 font-cormorant font-normal text-xl sm:text-3xl tracking-[0.15em] sm:tracking-[0.18em] leading-none uppercase truncate">
               J Kralovec
             </span>
-            <span className="text-[9px] text-slate-600 font-semibold tracking-[0.25em] uppercase mt-1">
+            <span className="text-[8px] sm:text-[9px] text-slate-600 font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase mt-0.5 sm:mt-1 truncate">
               REALTY GROUP
             </span>
           </div>
@@ -306,19 +308,19 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
         </div>
 
         {/* Mobile Hamburger & Inquire Trigger */}
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
           <button
             onClick={() => onOpenContactModal()}
-            className="px-4 py-2 rounded-xl bg-bahamas-500 text-white font-bold text-xs uppercase tracking-wider mr-1 shadow-sm"
+            className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-[10px] sm:text-xs uppercase tracking-wider shadow-sm"
           >
             Inquire
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2.5 rounded-xl text-slate-900 bg-slate-100 hover:bg-slate-200 focus:outline-none"
+            className="p-2 sm:p-2.5 rounded-xl text-slate-900 bg-slate-100 hover:bg-slate-200 focus:outline-none"
             aria-label="Toggle mobile menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
         </div>
       </div>
