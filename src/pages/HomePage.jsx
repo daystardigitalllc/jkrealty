@@ -1,303 +1,529 @@
-import React from 'react';
-import { Home, Building2, Layers, Sparkles, ArrowRight, ShieldCheck, MapPin, Phone, Award, Search, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  MapPin, Home, Building2, Layers, Tag, Search, ArrowRight, 
+  ShieldCheck, CheckCircle2, ChevronLeft, ChevronRight, Award, Key, Sparkles 
+} from 'lucide-react';
 import RealScoutWidget from '../components/RealScoutWidget';
-import Testimonials from '../components/Testimonials';
-import StatsSection from '../components/StatsSection';
 import SEO, { organizationSchema } from '../components/SEO';
 
 export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
+  // Hero Floating Filter State
+  const [selectedLocation, setSelectedLocation] = useState('DE');
+  const [selectedPropertyType, setSelectedPropertyType] = useState('SFR');
+  const [selectedPriceRange, setSelectedPriceRange] = useState('500k-5m');
+
+  // Testimonial Carousel State
+  const reviews = [
+    {
+      id: 1,
+      name: "KIMBERLYA SUTHERLAND",
+      detail: "Bought & Sold Single Family Home • Wilmington, DE & FL",
+      quote: "The level of discretion and market insight provided by the J Kralovec team was extraordinary. They found us a sanctuary that was never even listed.",
+      subquote: "Whether you are buying or selling, Jeff has the skills, capabilities, and local knowledge – in DE, PA, and FL – to get the job done! My house sold overnight at a price over asking."
+    },
+    {
+      id: 2,
+      name: "TODD SASSAMAN",
+      detail: "Bought & Sold Single Family Home • Triangle, Wilmington, DE",
+      quote: "Jeff is extremely motivated, professional, and responsive. He prepared our home to sell for maximum value and guided every step seamlessly.",
+      subquote: "Grateful for his expertise and deep market knowledge in Delaware and Pennsylvania."
+    },
+    {
+      id: 3,
+      name: "SEAN BRENNER",
+      detail: "Sold Townhouse • Claymont, DE",
+      quote: "Jeff got us listed in a matter of days and brought us an over-ask offer on the first weekend, even in a shifting market.",
+      subquote: "His dominance in local property sales made him the obvious and best choice."
+    }
+  ];
+
+  const [activeReviewIndex, setActiveReviewIndex] = useState(0);
+
+  const handleNextReview = () => {
+    setActiveReviewIndex((prev) => (prev + 1) % reviews.length);
+  };
+
+  const handlePrevReview = () => {
+    setActiveReviewIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    onOpenListingModal(selectedPropertyType);
+  };
+
   return (
-    <div className="space-y-16 pb-16">
+    <div className="bg-slate-50 min-h-screen text-slate-900 font-sans">
       <SEO 
-        title="Luxury Real Estate in DE, PA & FL"
-        description="Jeff Kralovec Realty Group - Premier real estate team serving Delaware, Pennsylvania, and Florida. Specializing in luxury homes, coastal properties, and record-setting sales."
+        title="Luxury Real Estate in DE, PA & FL | J. Kralovec Realty Group"
+        description="J Kralovec Realty Group - Premier luxury real estate team serving Delaware, Pennsylvania, and Florida."
         jsonLd={organizationSchema}
       />
-      {/* Hero Section with Luxury Architecture Background */}
-      <section className="relative bg-navy-900 text-white pt-12 pb-20 overflow-hidden min-h-[580px] flex items-center">
-        {/* Background Image with Dark Bahamas Overlay */}
+
+      {/* ========================================================================= */}
+      {/* 1. HERO SECTION WITH FLOATING FILTER BAR                                 */}
+      {/* ========================================================================= */}
+      <section className="relative w-full min-h-[620px] lg:min-h-[700px] flex items-center justify-center text-white overflow-hidden bg-navy-900">
+        {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/images/110850.jpg" 
-            alt="Luxury Coastal Real Estate" 
-            className="w-full h-full object-cover object-center"
+            alt="Luxury Coastal & Waterfront Living" 
+            className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-900/95 via-navy-900/90 to-navy-900/60" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-bahamas-500/20 rounded-full blur-[120px] pointer-events-none" />
+          {/* Subtle gradient dark overlay matching luxury oceanfront photography */}
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-navy-900/60" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bahamas-500/20 border border-bahamas-400/40 text-bahamas-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-bahamas-400" />
-              Premier Tri-State Luxury Group • DE • PA • FL
-            </div>
-
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-[1.15] text-white">
-              Luxury Coastal & Tri-State Real Estate <br />
-              <span className="text-gradient-bahamas bg-clip-text text-transparent bg-gradient-to-r from-bahamas-300 via-bahamas-400 to-white">
-                Designed Around You.
-              </span>
-            </h1>
-
-            <p className="text-slate-200 text-sm sm:text-lg leading-relaxed max-w-2xl font-light">
-              The <strong>Jeff Kralovec Realty Group</strong> delivers seamless, high-value real estate solutions across Delaware, Pennsylvania, and Florida. From over-asking home sales to coastal waterfront properties.
-            </p>
-
-            {/* Quick Search Action Pill Bar */}
-            <div className="bg-navy-950/80 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20 shadow-2xl max-w-xl space-y-3">
-              <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-bahamas-300 px-1 flex items-center justify-between">
-                <span>Browse Listings by Category</span>
-                <span className="text-[10px] text-slate-400">Powered by RealScout</span>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-2">
-                <button
-                  id="btn-house"
-                  onClick={() => onOpenListingModal('house')}
-                  className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
-                >
-                  <Home className="w-4 h-4 text-bahamas-500" />
-                  <span>Single Family</span>
-                </button>
-
-                <button
-                  id="btn-condo"
-                  onClick={() => onOpenListingModal('condo')}
-                  className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
-                >
-                  <Building2 className="w-4 h-4 text-bahamas-500" />
-                  <span>Condos & Towns</span>
-                </button>
-
-                <button
-                  id="btn-mf"
-                  onClick={() => onOpenListingModal('mf')}
-                  className="p-2.5 sm:p-3 rounded-xl bg-white/95 hover:bg-white active:bg-slate-100 text-slate-900 hover:text-bahamas-600 transition-all font-bold text-xs flex flex-col items-center gap-1 shadow-md hover:scale-[1.02] min-h-[44px]"
-                >
-                  <Layers className="w-4 h-4 text-bahamas-500" />
-                  <span>Multi-Family</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Hero CTA Buttons - Side by Side on Mobile */}
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-1 max-w-xl">
-              <button
-                onClick={() => setCurrentPage('listings')}
-                className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider shadow-glow hover:shadow-glow-lg transition-all flex items-center justify-center gap-1 sm:gap-2 text-center"
-              >
-                <span className="truncate">Explore Listings</span>
-                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-              </button>
-
-              <button
-                onClick={onOpenValuationModal}
-                className="w-full py-3.5 px-2 sm:px-6 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold text-[11px] sm:text-sm uppercase tracking-wider transition-all backdrop-blur-md text-center flex items-center justify-center"
-              >
-                <span className="truncate">Home Valuation</span>
-              </button>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="pt-2 flex items-center gap-6 text-xs text-slate-300">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-bahamas-400" />
-                Over-Asking Price Track Record
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-bahamas-400" />
-                Advanced RealScout MLS Tech
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <StatsSection />
-
-      {/* RealScout Live MLS Feed Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <RealScoutWidget 
-          initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
-          title="Explore Current MLS Listings"
-        />
-      </section>
-
-      {/* Regional State Markets Section */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        {/* Hero Main Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 pb-28 text-center flex flex-col items-center">
           
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bahamas-50 border border-bahamas-200 text-bahamas-700 text-xs font-bold uppercase tracking-wider">
-              <MapPin className="w-3.5 h-3.5 text-bahamas-500" />
-              Regional Expertise
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900">
-              Serving Premier Markets Across 3 States
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
-              Whether buying a primary residence in Delaware, selling in Greater Philadelphia, or purchasing a beach retreat in Florida, we guide you every step of the way.
-            </p>
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal tracking-tight leading-[1.1] max-w-4xl text-white drop-shadow-md">
+            Your Gateway to Crystalline Living
+          </h1>
+
+          <p className="mt-4 text-sm sm:text-lg text-slate-200 font-light max-w-2xl tracking-wide">
+            Delivering premier luxury & coastal real estate solutions across Delaware, Pennsylvania, and Florida.
+          </p>
+
+          {/* Floating Search Filter Bar */}
+          <div className="w-full max-w-5xl mt-12 bg-white text-slate-800 rounded-2xl shadow-2xl p-3 sm:p-4 border border-slate-100 backdrop-blur-md">
+            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-2 items-center">
+              
+              {/* Filter 1: Location */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/60 text-left">
+                <div className="p-2 rounded-lg bg-bahamas-50 text-bahamas-600 shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col w-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    LOCATION
+                  </span>
+                  <select 
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                    className="bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer w-full"
+                  >
+                    <option value="DE">Delaware (Greenville, Wilmington, Beaches)</option>
+                    <option value="PA">Pennsylvania (Philly, Main Line)</option>
+                    <option value="FL">Florida (Palm Beach, Coastal)</option>
+                    <option value="ALL">All Tri-State & Coastal</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Filter 2: Property Type */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/60 text-left">
+                <div className="p-2 rounded-lg bg-bahamas-50 text-bahamas-600 shrink-0">
+                  <Home className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col w-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    PROPERTY TYPE
+                  </span>
+                  <select 
+                    value={selectedPropertyType}
+                    onChange={(e) => setSelectedPropertyType(e.target.value)}
+                    className="bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer w-full"
+                  >
+                    <option value="house">Single Family Residence</option>
+                    <option value="condo">Condos & Townhomes</option>
+                    <option value="mf">Multi-Family Estates</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Filter 3: Price Range */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/60 text-left">
+                <div className="p-2 rounded-lg bg-bahamas-50 text-bahamas-600 shrink-0">
+                  <Tag className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col w-full">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    PRICE RANGE
+                  </span>
+                  <select 
+                    value={selectedPriceRange}
+                    onChange={(e) => setSelectedPriceRange(e.target.value)}
+                    className="bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer w-full"
+                  >
+                    <option value="500k-5m">$500k - $2.5M</option>
+                    <option value="2.5m-10m">$2.5M - $10M+</option>
+                    <option value="any">Any Price Range</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Search Button */}
+              <button
+                type="submit"
+                className="w-full h-full min-h-[52px] py-3 px-6 bg-bahamas-600 hover:bg-bahamas-700 active:bg-bahamas-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+              >
+                <span>Search</span>
+                <Search className="w-4 h-4" />
+              </button>
+
+            </form>
           </div>
 
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 2. CURATED COLLECTION / EXCLUSIVE NEW LISTINGS                            */}
+      {/* ========================================================================= */}
+      <section className="py-20 bg-slate-50/60 border-b border-slate-200/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-bahamas-600 block mb-2">
+                CURATED COLLECTION
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-medium text-slate-900">
+                Exclusive New Listings
+              </h2>
+            </div>
+
+            <button
+              onClick={() => setCurrentPage('listings')}
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-bahamas-600 transition-colors group"
+            >
+              <span>View All Properties</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-bahamas-500" />
+            </button>
+          </div>
+
+          {/* 3 Luxury Property Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            {/* Delaware Card */}
+            {/* Property 1 */}
             <div 
-              onClick={() => setCurrentPage('delaware')}
-              className="group bg-slate-50 hover:bg-bahamas-50/50 rounded-3xl p-8 border border-slate-200 hover:border-bahamas-400 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-xl relative overflow-hidden flex flex-col justify-between"
+              onClick={() => onOpenListingModal('house')}
+              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 flex flex-col justify-between"
             >
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-bahamas-500 text-white flex items-center justify-center font-bold text-lg shadow-glow">
-                  DE
+              <div>
+                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                  <img 
+                    src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80" 
+                    alt="The Azure Pavilion" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-slate-900 rounded-md shadow-sm">
+                      NEW LISTING
+                    </span>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
-                  Delaware Real Estate
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  Greenville, Wilmington, Triangle, Claymont, Rehoboth Beach, Lewes, and Dewey Beach. Low property taxes & coastal living.
-                </p>
-                <ul className="space-y-2 text-xs font-medium text-slate-700 pt-2">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-bahamas-500" />
-                    Greenville HQ (3701 Kennett Pike)
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-bahamas-500" />
-                    Over-ask selling record in Claymont & Wilmington
-                  </li>
-                </ul>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
+                    The Azure Pavilion
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1 font-medium">
+                    Greenville, Delaware
+                  </p>
+                </div>
               </div>
 
-              <div className="pt-6 border-t border-slate-200/80 mt-6 flex items-center justify-between text-bahamas-700 font-bold text-xs uppercase tracking-wider">
-                <span>Explore DE Listings</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
+                <span>5 BD • 6 BA • 10,200 SQ FT</span>
+                <span className="font-bold text-slate-900 text-sm">$2,850,000</span>
               </div>
             </div>
 
-            {/* Pennsylvania Card */}
+            {/* Property 2 */}
             <div 
-              onClick={() => setCurrentPage('pennsylvania')}
-              className="group bg-slate-50 hover:bg-bahamas-50/50 rounded-3xl p-8 border border-slate-200 hover:border-bahamas-400 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-xl relative overflow-hidden flex flex-col justify-between"
+              onClick={() => onOpenListingModal('house')}
+              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 flex flex-col justify-between"
             >
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-navy-800 text-white flex items-center justify-center font-bold text-lg shadow-md">
-                  PA
+              <div>
+                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                  <img 
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" 
+                    alt="Veridian Main Line Estates" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-slate-900 rounded-md shadow-sm">
+                      FEATURED
+                    </span>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
-                  Pennsylvania Real Estate
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  Philadelphia, Main Line, Delaware County, and Chester County. Modern suburban estates & vibrant city homes.
-                </p>
-                <ul className="space-y-2 text-xs font-medium text-slate-700 pt-2">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-bahamas-500" />
-                    Main Line & Philadelphia luxury homes
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-bahamas-500" />
-                    Seamless multi-state relocations
-                  </li>
-                </ul>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
+                    Veridian Main Line Estate
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1 font-medium">
+                    Bryn Mawr, Pennsylvania
+                  </p>
+                </div>
               </div>
 
-              <div className="pt-6 border-t border-slate-200/80 mt-6 flex items-center justify-between text-bahamas-700 font-bold text-xs uppercase tracking-wider">
-                <span>Explore PA Listings</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
+                <span>6 BD • 7 BA • 11,500 SQ FT</span>
+                <span className="font-bold text-slate-900 text-sm">$3,950,000</span>
               </div>
             </div>
 
-            {/* Florida Card */}
+            {/* Property 3 */}
             <div 
-              onClick={() => setCurrentPage('florida')}
-              className="group bg-slate-50 hover:bg-bahamas-50/50 rounded-3xl p-8 border border-slate-200 hover:border-bahamas-400 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-xl relative overflow-hidden flex flex-col justify-between"
+              onClick={() => onOpenListingModal('condo')}
+              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 flex flex-col justify-between"
             >
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-bahamas-400 to-bahamas-600 text-white flex items-center justify-center font-bold text-lg shadow-glow">
-                  FL
+              <div>
+                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                  <img 
+                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" 
+                    alt="The Reef Penthouse" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-slate-900 rounded-md shadow-sm">
+                      WATERFRONT
+                    </span>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
-                  Florida Beach & Coastal
-                </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  Palm Beach, Naples, Miami, and Gulf Coast waterfront residences. Sunshine State vacation homes & tax-friendly living.
-                </p>
-                <ul className="space-y-2 text-xs font-medium text-slate-700 pt-2">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-bahamas-500" />
-                    Waterfront & Beachfront specialists
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-bahamas-500" />
-                    Second-home & luxury investments
-                  </li>
-                </ul>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-serif font-bold text-slate-900 group-hover:text-bahamas-600 transition-colors">
+                    The Reef Beachfront Penthouse
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1 font-medium">
+                    Palm Beach, Florida
+                  </p>
+                </div>
               </div>
 
-              <div className="pt-6 border-t border-slate-200/80 mt-6 flex items-center justify-between text-bahamas-700 font-bold text-xs uppercase tracking-wider">
-                <span>Explore FL Listings</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
+                <span>4 BD • 4.5 BA • 7,800 SQ FT</span>
+                <span className="font-bold text-slate-900 text-sm">$8,200,000</span>
               </div>
             </div>
 
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. WHY DISCERNING CLIENTS CHOOSE J KRALOVEC (2x2 BENTO GRID SECTION)     */}
+      {/* ========================================================================= */}
+      <section className="py-24 bg-slate-100/70 border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Content Column */}
+            <div className="lg:col-span-5 space-y-6">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-bahamas-600 block">
+                THE STANDARD OF EXCELLENCE
+              </span>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-medium text-slate-900 leading-[1.2]">
+                Why Discerning Clients Choose J Kralovec
+              </h2>
+
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light">
+                We don't just sell properties; we facilitate a lifestyle of unparalleled luxury. Our deep-rooted tri-state connections and architectural insight provide our clients with opportunities invisible to the public market.
+              </p>
+
+              {/* Bullet Features */}
+              <div className="space-y-4 pt-2">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-bahamas-100 text-bahamas-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <ShieldCheck className="w-5 h-5 text-bahamas-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-sm">Unrivaled Expertise</h4>
+                    <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Decades of navigating the complex high-end Delaware, Pennsylvania, and Florida markets with precision.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-bahamas-100 text-bahamas-700 flex items-center justify-center shrink-0 mt-0.5">
+                    <Sparkles className="w-5 h-5 text-bahamas-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-sm">Global Network</h4>
+                    <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Direct access to the region's most exclusive buyers, luxury developers, and off-market sanctuaries.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: 2x2 Bento Grid */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              
+              {/* Box 1: Sales Volume */}
+              <div className="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between min-h-[200px]">
+                <div>
+                  <h3 className="text-4xl sm:text-5xl font-serif font-bold text-slate-900">
+                    $45M+
+                  </h3>
+                </div>
+                <div className="pt-6 border-t border-slate-100 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  IN TOTAL SALES VOLUME
+                </div>
+              </div>
+
+              {/* Box 2: Founder Photo */}
+              <div className="bg-slate-900 rounded-2xl overflow-hidden relative shadow-sm min-h-[200px] border border-slate-200/80 group">
+                <img 
+                  src="/images/jkrg-photo.png" 
+                  alt="Jeff Kralovec" 
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4 text-white">
+                  <span className="text-xs font-serif font-bold block">Jeff Kralovec</span>
+                  <span className="text-[10px] text-bahamas-300 font-semibold uppercase tracking-wider block">Founder & Principal</span>
+                </div>
+              </div>
+
+              {/* Box 3: Dark Quote Block */}
+              <div className="bg-navy-900 text-white rounded-2xl p-8 shadow-md flex flex-col justify-between min-h-[220px]">
+                <blockquote className="text-xs sm:text-sm font-light leading-relaxed text-slate-200">
+                  "Every property has a story; we place it in front of those who appreciate it."
+                </blockquote>
+                <div className="pt-4 border-t border-navy-800 text-[10px] font-bold uppercase tracking-wider text-bahamas-300">
+                  — J. KRALOVEC, FOUNDER
+                </div>
+              </div>
+
+              {/* Box 4: Closed Transactions */}
+              <div className="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between min-h-[220px]">
+                <div className="w-10 h-10 rounded-xl bg-bahamas-50 text-bahamas-600 flex items-center justify-center mb-4">
+                  <Key className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-4xl font-serif font-bold text-slate-900">
+                    75+
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Off-market & record transactions successfully closed.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. TESTIMONIAL QUOTE CAROUSEL SECTION                                    */}
+      {/* ========================================================================= */}
+      <section className="py-28 bg-white border-b border-slate-200/60">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-8">
+          
+          {/* Quote Mark Icon */}
+          <div className="text-6xl font-serif text-bahamas-300 font-bold leading-none select-none">
+            ”
+          </div>
+
+          {/* Review Body */}
+          <blockquote className="text-xl sm:text-3xl font-serif italic text-slate-800 leading-relaxed font-normal">
+            "{reviews[activeReviewIndex].quote}"
+          </blockquote>
+
+          {/* Subquote details */}
+          <p className="text-xs sm:text-sm text-slate-500 font-light max-w-2xl mx-auto leading-relaxed">
+            {reviews[activeReviewIndex].subquote}
+          </p>
+
+          {/* Author Name */}
+          <div className="pt-2">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-900">
+              {reviews[activeReviewIndex].name}
+            </h4>
+            <p className="text-[11px] text-slate-400 font-medium mt-1">
+              {reviews[activeReviewIndex].detail}
+            </p>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-center gap-3 pt-4">
+            <button
+              onClick={handlePrevReview}
+              className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-bahamas-600 flex items-center justify-center transition-colors shadow-sm"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleNextReview}
+              className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-bahamas-600 flex items-center justify-center transition-colors shadow-sm"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 5. CALL TO ACTION BANNER                                                 */}
+      {/* ========================================================================= */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="relative rounded-3xl overflow-hidden bg-navy-900 text-white min-h-[380px] flex items-center justify-center text-center p-8 sm:p-16 shadow-2xl border border-navy-800">
+          {/* Background Overlay Image */}
+          <div className="absolute inset-0 z-0 opacity-40">
+            <img 
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80" 
+              alt="Coastal Luxury Sanctuary" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-navy-950/60" />
+          </div>
+
+          {/* Banner Content */}
+          <div className="relative z-10 max-w-2xl space-y-6">
+            <h2 className="text-3xl sm:text-5xl font-serif font-medium tracking-tight text-white">
+              Ready to find your sanctuary?
+            </h2>
+
+            <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+              Our advisors are standing by to curate a bespoke selection of properties that align with your lifestyle and vision.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <button
+                onClick={() => onOpenContactModal('CTA Banner Consultation')}
+                className="w-full sm:w-auto px-8 py-3.5 bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md"
+              >
+                BOOK A CONSULTATION
+              </button>
+
+              <button
+                onClick={() => setCurrentPage('listings')}
+                className="w-full sm:w-auto px-8 py-3.5 bg-transparent hover:bg-white/10 text-white border border-white/40 font-bold text-xs uppercase tracking-wider rounded-xl transition-all"
+              >
+                EXPLORE LISTINGS
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <Testimonials />
-
-      {/* Meet the Team Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-navy-900 via-bahamas-950 to-navy-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden border border-bahamas-500/30">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            <div className="lg:col-span-7 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-bahamas-300">
-                Top-Notch Office Staff & Agents
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white">
-                Let Our Team Take Care of You
-              </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
-                Our agents are dedicated professionals who understand both the market and the dreams behind every move. With deep local knowledge, industry expertise, and personalized attention, we ensure your buying or selling experience is smooth, transparent, and rewarding.
-              </p>
-              
-              <div className="pt-2 flex flex-wrap gap-4">
-                <button
-                  onClick={() => setCurrentPage('agents')}
-                  className="px-6 py-3 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider shadow-glow transition-all"
-                >
-                  Meet All 5 Team Agents
-                </button>
-                <button
-                  onClick={() => onOpenContactModal('Greenville Office')}
-                  className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs uppercase tracking-[0.15em] transition-all"
-                >
-                  Contact Greenville Office
-                </button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative rounded-2xl overflow-hidden border-2 border-bahamas-400/40 shadow-glow w-full max-w-md bg-white p-1.5">
-                <img
-                  src="/images/jkrg-group-photo.jpg"
-                  alt="Jeff Kralovec Realty Group Team"
-                  className="w-full h-auto max-h-[300px] sm:max-h-[340px] object-contain rounded-xl"
-                />
-                <div className="absolute bottom-3 left-3 right-3 bg-navy-900/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-bahamas-500/30 flex items-center justify-between text-xs text-white font-bold">
-                  <span>The Jeff Kralovec Realty Group (JKRG)</span>
-                  <span className="text-bahamas-300 text-[10px] uppercase font-bold">5 REALTORS®</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+      {/* ========================================================================= */}
+      {/* 6. REALSCOUT LIVE MLS FEED INTEGRATION                                   */}
+      {/* ========================================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <RealScoutWidget 
+          initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
+          title="Explore Live Tri-State MLS Listings"
+        />
       </section>
     </div>
   );
