@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Home, Building, Layers, Sparkles, Check } from 'lucide-react';
 
 export default function RealScoutWidget({ 
   initialPropertyType = "SFR,MF,TC,LAL,MOBILE,OTHER", 
-  title = "Featured Properties & MLS Listings",
-  stateFilter = null
+  title = "Featured Properties & MLS Listings"
 }) {
   const [selectedType, setSelectedType] = useState(initialPropertyType);
-  const [activeState, setActiveState] = useState(stateFilter);
-  const containerRef = useRef(null);
   const agentId = "QWdlbnQtNzQ1MjM=";
 
   const categories = [
@@ -18,98 +15,14 @@ export default function RealScoutWidget({
     { id: "MF", label: "Multi-Family", icon: Layers, code: "MF" },
   ];
 
-  const states = [
-    { code: null, label: "All States" },
-    { code: "DE", label: "Delaware" },
-    { code: "PA", label: "Pennsylvania" },
-    { code: "FL", label: "Florida" },
-  ];
-
-  // Precision RealScout Card Filter Engine
-  useEffect(() => {
-    const applyPrecisionStateFilter = () => {
-      if (!containerRef.current) return;
-      const widget = containerRef.current.querySelector('realscout-office-listings');
-
-      // Recursively gather all nodes (including inner shadow DOMs or iframes)
-      const allNodes = [];
-      const collectNodes = (root) => {
-        if (!root) return;
-        try {
-          const els = root.querySelectorAll('*');
-          els.forEach((el) => {
-            allNodes.push(el);
-            if (el.shadowRoot) collectNodes(el.shadowRoot);
-          });
-        } catch (e) {
-          // Ignore inaccessible nodes
-        }
-      };
-
-      if (widget?.shadowRoot) collectNodes(widget.shadowRoot);
-      collectNodes(containerRef.current);
-
-      // Identify individual card containers by finding leaf elements containing property specs/address
-      allNodes.forEach((el) => {
-        const text = el.innerText || el.textContent || '';
-        
-        // Match elements that contain listing specs and state address text
-        const hasListingData = text.includes('Beds') && (text.includes(', DE') || text.includes(', PA') || text.includes(', FL') || text.includes('DE ') || text.includes('PA ') || text.includes('FL '));
-
-        if (hasListingData) {
-          // Walk up to find the top-level single listing card container
-          let cardNode = el;
-          while (cardNode.parentElement && cardNode.parentElement !== containerRef.current) {
-            const parentText = cardNode.parentElement.innerText || cardNode.parentElement.textContent || '';
-            const bedsMatches = (parentText.match(/Beds/g) || []).length;
-            // If parent contains multiple cards (more than 1 'Beds'), stop at cardNode
-            if (bedsMatches > 1) {
-              break;
-            }
-            cardNode = cardNode.parentElement;
-          }
-
-          if (activeState) {
-            const deMatch = /,\s*DE\b|\bDE\s+\d{5}\b|\bDelaware\b|\b197\d{2}\b|\b198\d{2}\b|\b199\d{2}\b/i.test(text);
-            const paMatch = /,\s*PA\b|\bPA\s+\d{5}\b|\bPennsylvania\b|\b190\d{2}\b|\b191\d{2}\b|\b193\d{2}\b|\b194\d{2}\b/i.test(text);
-            const flMatch = /,\s*FL\b|\bFL\s+\d{5}\b|\bFlorida\b|\b32\d{3}\b|\b33\d{3}\b|\b34\d{3}\b/i.test(text);
-
-            let isMatch = false;
-            if (activeState === 'DE' && deMatch) isMatch = true;
-            if (activeState === 'PA' && paMatch) isMatch = true;
-            if (activeState === 'FL' && flMatch) isMatch = true;
-
-            if (!isMatch) {
-              cardNode.style.setProperty('display', 'none', 'important');
-              cardNode.dataset.stateFiltered = 'hidden';
-            } else {
-              cardNode.style.setProperty('display', '', '');
-              delete cardNode.dataset.stateFiltered;
-            }
-          } else {
-            cardNode.style.setProperty('display', '', '');
-            delete cardNode.dataset.stateFiltered;
-          }
-        }
-      });
-    };
-
-    applyPrecisionStateFilter();
-    const interval = setInterval(applyPrecisionStateFilter, 300);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [activeState, selectedType]);
-
   return (
-    <div ref={containerRef} className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-card border border-bahamas-100 relative overflow-hidden">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-card border border-bahamas-100 relative overflow-hidden">
       {/* Background Subtle Accent */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-bahamas-50 rounded-full blur-3xl -z-0 pointer-events-none" />
 
       <div className="relative z-10 space-y-4 sm:space-y-6">
         {/* Header & Filter Controls */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-100">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-100">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-bahamas-50 border border-bahamas-200 text-bahamas-700 text-[11px] font-bold uppercase tracking-wider mb-1.5">
               <Sparkles className="w-3.5 h-3.5 text-bahamas-500" />
@@ -120,49 +33,27 @@ export default function RealScoutWidget({
             </h3>
           </div>
 
-          {/* Filter Bar */}
-          <div className="flex flex-wrap items-center gap-2">
-            
-            {/* State Filter Buttons */}
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
-              {states.map((st) => (
+          {/* Property Category Buttons */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 pt-1 md:py-0 -mx-1 px-1">
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              const isSelected = selectedType === cat.code;
+              return (
                 <button
-                  key={st.label}
-                  onClick={() => setActiveState(st.code)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] ${
-                    activeState === st.code
-                      ? 'bg-navy-900 text-white shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
+                  key={cat.id}
+                  onClick={() => setSelectedType(cat.code)}
+                  className={`px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1.5 shrink-0 min-h-[40px] ${
+                    isSelected
+                      ? 'bg-bahamas-500 text-white shadow-glow'
+                      : 'bg-slate-100 text-slate-700 hover:bg-bahamas-50 hover:text-bahamas-700 border border-slate-200/80 active:bg-slate-200'
                   }`}
                 >
-                  {st.label}
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{cat.label}</span>
+                  {isSelected && <Check className="w-3.5 h-3.5 text-white ml-0.5" />}
                 </button>
-              ))}
-            </div>
-
-            {/* Property Type Buttons */}
-            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
-              {categories.map((cat) => {
-                const Icon = cat.icon;
-                const isSelected = selectedType === cat.code;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedType(cat.code)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1 shrink-0 min-h-[36px] ${
-                      isSelected
-                        ? 'bg-bahamas-500 text-white shadow-glow'
-                        : 'bg-slate-100 text-slate-700 hover:bg-bahamas-50 hover:text-bahamas-700 border border-slate-200/80'
-                    }`}
-                  >
-                    <Icon className="w-3.5 h-3.5" />
-                    <span>{cat.label}</span>
-                    {isSelected && <Check className="w-3 h-3 text-white ml-0.5" />}
-                  </button>
-                );
-              })}
-            </div>
-
+              );
+            })}
           </div>
         </div>
 

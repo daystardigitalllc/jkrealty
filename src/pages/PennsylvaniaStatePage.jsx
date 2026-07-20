@@ -86,7 +86,6 @@ export default function PennsylvaniaStatePage({ onOpenListingModal, onOpenValuat
         <RealScoutWidget 
           initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
           title="Pennsylvania Live MLS Feed"
-          stateFilter="PA"
         />
       </section>
 
