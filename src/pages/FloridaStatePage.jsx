@@ -101,6 +101,7 @@ export default function FloridaStatePage({ onOpenListingModal, onOpenValuationMo
         <RealScoutWidget 
           initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
           title="Florida Live MLS Feed"
+          stateFilter="FL"
         />
       </section>
 

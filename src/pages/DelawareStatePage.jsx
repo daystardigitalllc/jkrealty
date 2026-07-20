@@ -99,6 +99,7 @@ export default function DelawareStatePage({ onOpenListingModal, onOpenValuationM
         <RealScoutWidget 
           initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
           title="Delaware Live MLS Feed"
+          stateFilter="DE"
         />
       </section>
 
