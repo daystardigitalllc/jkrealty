@@ -83,6 +83,7 @@ export default function App() {
           <AgentsPage 
             setCurrentPage={setCurrentPage}
             onOpenContactModal={handleOpenContactModal}
+            onOpenValuationModal={handleOpenValuationModal}
           />
         );
       case 'about':

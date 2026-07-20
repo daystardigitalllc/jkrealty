@@ -1,7 +1,7 @@
 import React from 'react';
 import { Phone, Mail, Award, CheckCircle2, Sparkles, MapPin } from 'lucide-react';
 
-export default function AgentsPage({ onOpenValuationModal }) {
+export default function AgentsPage({ setCurrentPage, onOpenContactModal, onOpenValuationModal }) {
   const agents = [
     {
       id: 1,
@@ -178,7 +178,7 @@ export default function AgentsPage({ onOpenValuationModal }) {
           </p>
           <div className="pt-2">
             <button
-              onClick={onOpenValuationModal}
+              onClick={() => onOpenContactModal('Free Consultation')}
               className="px-8 py-3.5 rounded-xl bg-bahamas-500 hover:bg-bahamas-600 text-white font-bold text-xs uppercase tracking-wider shadow-glow transition-all"
             >
               Get Free Home Consultation
