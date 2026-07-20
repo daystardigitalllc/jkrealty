@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Building2, Home, Layers, Sparkles } from 'lucide-react';
+import { X, Sparkles } from 'lucide-react';
 
 export default function PropertyModal({ isOpen, onClose, initialType = "house" }) {
   if (!isOpen) return null;
@@ -29,31 +29,31 @@ export default function PropertyModal({ isOpen, onClose, initialType = "house" }
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md transition-opacity duration-300"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/80 backdrop-blur-md transition-opacity duration-300"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-white w-full max-w-5xl max-h-[90vh] rounded-3xl shadow-2xl border border-bahamas-200 overflow-hidden flex flex-col animate-modal">
+      <div className="bg-white w-full max-w-5xl h-[94vh] sm:h-auto sm:max-h-[90vh] rounded-t-3xl sm:rounded-3xl shadow-2xl border border-bahamas-200 overflow-hidden flex flex-col animate-modal">
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-navy-800 via-bahamas-900 to-navy-800 text-white p-5 sm:p-6 flex items-center justify-between border-b border-bahamas-500/30">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-bahamas-500 flex items-center justify-center text-white shadow-glow">
-              <Sparkles className="w-5 h-5" />
+        <div className="bg-gradient-to-r from-navy-800 via-bahamas-900 to-navy-800 text-white p-4 sm:p-6 flex items-center justify-between border-b border-bahamas-500/30 shrink-0">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-bahamas-500 flex items-center justify-center text-white shadow-glow">
+              <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-xl font-serif font-bold text-white">
+              <h3 className="text-base sm:text-xl font-serif font-bold text-white leading-tight">
                 {displayTitle}
               </h3>
-              <p className="text-xs text-bahamas-300">
-                Jeff Kralovec Realty Group • RealScout Live MLS Feed
+              <p className="text-[10px] sm:text-xs text-bahamas-300">
+                Jeff Kralovec Realty Group • RealScout Live Feed
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus:outline-none"
+            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white flex items-center justify-center transition-colors focus:outline-none shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -61,7 +61,7 @@ export default function PropertyModal({ isOpen, onClose, initialType = "house" }
         </div>
 
         {/* Modal Body */}
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-50">
+        <div className="p-2 sm:p-6 overflow-y-auto flex-1 bg-slate-50">
           <realscout-office-listings
             agent-encoded-id={agentId}
             sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
@@ -71,11 +71,11 @@ export default function PropertyModal({ isOpen, onClose, initialType = "house" }
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-white p-4 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
-          <span>Need help finding a specific property? Call Jeff at (267) 858-0914</span>
+        <div className="bg-white p-3 sm:p-4 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-slate-500 shrink-0">
+          <span className="text-center sm:text-left text-[11px] sm:text-xs">Questions? Call Jeff at (267) 858-0914</span>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors"
+            className="w-full sm:w-auto px-5 py-2.5 bg-slate-100 active:bg-slate-200 text-slate-800 font-bold rounded-xl transition-colors min-h-[44px]"
           >
             Close Viewer
           </button>

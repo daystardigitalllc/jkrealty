@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Menu, X, ChevronDown, Sparkles } from 'lucide-react';
+import { Phone, Mail, MapPin, Menu, X, ChevronDown, Sparkles, Building2, Home } from 'lucide-react';
 
 export default function Header({ currentPage, setCurrentPage, onOpenListingModal, onOpenValuationModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,46 +27,36 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
 
   return (
     <header className="sticky top-0 z-40 glass-header shadow-sm transition-all duration-300">
-      {/* Top Announcement Bar */}
-      <div className="bg-gradient-to-r from-navy-800 via-bahamas-900 to-navy-800 text-white text-xs py-2 px-4 border-b border-bahamas-500/20">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          <div className="flex items-center gap-4 text-slate-300">
-            <span className="flex items-center gap-1.5 font-medium text-bahamas-300">
-              <Sparkles className="w-3.5 h-3.5 text-bahamas-400 animate-pulse" />
-              Jeff Kralovec Realty Group: DE • PA • FL
-            </span>
-            <span className="hidden md:inline text-slate-600">|</span>
-            <span className="hidden md:inline-flex items-center gap-1 text-slate-300">
-              <MapPin className="w-3 h-3 text-bahamas-400" />
-              3701 Kennett Pike, Greenville, DE 19807
+      {/* Top Announcement Bar - Compact on Mobile */}
+      <div className="bg-gradient-to-r from-navy-800 via-bahamas-900 to-navy-800 text-white text-[11px] sm:text-xs py-1.5 px-3 border-b border-bahamas-500/20">
+        <div className="max-w-7xl mx-auto flex justify-between items-center gap-2">
+          <div className="flex items-center gap-2 text-slate-300 truncate">
+            <span className="flex items-center gap-1 font-medium text-bahamas-300 truncate">
+              <Sparkles className="w-3 h-3 text-bahamas-400 shrink-0" />
+              <span className="truncate">JKRG Tri-State: DE • PA • FL</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
-            <a href="tel:2678580914" className="flex items-center gap-1.5 hover:text-bahamas-300 transition-colors font-medium">
+          <div className="flex items-center gap-3 shrink-0">
+            <a href="tel:2678580914" className="flex items-center gap-1 hover:text-bahamas-300 transition-colors font-bold text-white">
               <Phone className="w-3 h-3 text-bahamas-400" />
-              (267) 858-0914
-            </a>
-            <span className="text-slate-600">|</span>
-            <a href="mailto:jeff.kralovec@compass.com" className="flex items-center gap-1.5 hover:text-bahamas-300 transition-colors">
-              <Mail className="w-3 h-3 text-bahamas-400" />
-              jeff.kralovec@compass.com
+              <span>(267) 858-0914</span>
             </a>
           </div>
         </div>
       </div>
 
       {/* Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between">
         {/* Brand Official Logo */}
         <button 
           onClick={() => handleNavClick('home')}
-          className="flex items-center gap-3 group focus:outline-none text-left"
+          className="flex items-center gap-2.5 group focus:outline-none text-left shrink-0"
         >
           <img 
             src="/logo.svg" 
             alt="J. Kralovec Realty Group" 
-            className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-9 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <div className="hidden sm:block border-l border-slate-200 pl-3">
             <span className="text-slate-900 font-serif font-bold text-xs uppercase tracking-widest block">
@@ -166,27 +156,30 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           </button>
         </div>
 
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-xl text-slate-700 hover:text-bahamas-600 hover:bg-slate-100 focus:outline-none"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile menu hamburger button */}
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2.5 rounded-xl text-slate-800 bg-slate-100 hover:bg-bahamas-50 hover:text-bahamas-600 focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
+            aria-label="Toggle mobile menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer - High contrast, touch optimized */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-100 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-3 shadow-2xl animate-modal">
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-8 space-y-4 shadow-2xl animate-modal max-h-[85vh] overflow-y-auto">
           <div className="grid grid-cols-2 gap-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-bold text-left transition-all ${
+                className={`px-4 py-3 rounded-xl text-sm font-bold text-left transition-all min-h-[48px] ${
                   currentPage === item.id
                     ? 'bg-bahamas-500 text-white shadow-sm'
-                    : 'bg-slate-50 text-slate-800 hover:bg-bahamas-50'
+                    : 'bg-slate-100 text-slate-900 active:bg-bahamas-100'
                 }`}
               >
                 {item.label}
@@ -198,34 +191,34 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
             <div className="text-xs font-bold uppercase tracking-wider text-bahamas-600 px-1 mb-2">
               State Market Hubs
             </div>
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               {stateMarkets.map((m) => (
                 <button
                   key={m.id}
                   onClick={() => handleNavClick(m.id)}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl transition-all flex items-center justify-between ${
+                  className={`w-full text-left px-4 py-3 rounded-xl transition-all flex items-center justify-between min-h-[48px] ${
                     currentPage === m.id
                       ? 'bg-bahamas-500 text-white font-bold'
-                      : 'bg-slate-50 text-slate-800'
+                      : 'bg-slate-50 text-slate-900 active:bg-bahamas-50'
                   }`}
                 >
                   <span className="text-sm font-bold">{m.label} Real Estate</span>
-                  <span className="text-xs opacity-75">{m.detail}</span>
+                  <span className="text-xs opacity-80">{m.detail}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+          <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
             <button
               onClick={() => { handleNavClick('contact'); }}
-              className="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-sm text-center"
+              className="w-full py-3.5 rounded-xl bg-slate-900 text-white font-bold text-sm text-center min-h-[48px]"
             >
               Contact Jeff's Team
             </button>
             <button
               onClick={() => { setMobileMenuOpen(false); onOpenValuationModal(); }}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 text-white font-bold text-sm shadow-glow text-center"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-bahamas-500 to-bahamas-600 text-white font-bold text-sm shadow-glow text-center min-h-[48px]"
             >
               Get Instant Home Valuation
             </button>

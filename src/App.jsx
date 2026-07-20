@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import PropertyModal from './components/PropertyModal';
 import ValuationModal from './components/ValuationModal';
+import MobileBottomBar from './components/MobileBottomBar';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -14,7 +15,6 @@ import FloridaStatePage from './pages/FloridaStatePage';
 import ContactPage from './pages/ContactPage';
 
 export default function App() {
-  // Helper to map pathname to page id
   const getPageFromPath = (path) => {
     switch (path.toLowerCase().replace(/\/$/, '')) {
       case '/about':
@@ -66,7 +66,6 @@ export default function App() {
   const [listingModalType, setListingModalType] = useState('house');
   const [valuationModalOpen, setValuationModalOpen] = useState(false);
 
-  // Sync state with URL path
   const setCurrentPage = (pageId) => {
     setCurrentPageState(pageId);
     const targetPath = getPathFromPage(pageId);
@@ -76,7 +75,6 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Listen for browser Back/Forward navigation
   useEffect(() => {
     const handlePopState = () => {
       setCurrentPageState(getPageFromPath(window.location.pathname));
@@ -172,7 +170,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-bahamas-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-bahamas-500 selection:text-white pb-16 md:pb-0">
       {/* Header */}
       <Header
         currentPage={currentPage}
@@ -189,6 +187,12 @@ export default function App() {
       {/* Footer */}
       <Footer
         setCurrentPage={setCurrentPage}
+        onOpenValuationModal={handleOpenValuationModal}
+      />
+
+      {/* Floating Mobile Bottom Quick Action Bar */}
+      <MobileBottomBar
+        onOpenListingModal={handleOpenListingModal}
         onOpenValuationModal={handleOpenValuationModal}
       />
 
