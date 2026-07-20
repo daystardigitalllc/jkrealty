@@ -84,25 +84,26 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
             Delivering premier luxury & coastal real estate solutions across Delaware, Pennsylvania, and Florida.
           </p>
 
-          {/* Hero Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 w-full max-w-lg">
+          {/* Hero Action Buttons - Side by Side on Mobile and Desktop */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-8 sm:mt-10 w-full max-w-md sm:max-w-xl">
             <button
               onClick={() => {
                 const el = document.getElementById('mls-listings');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto px-8 py-4 bg-bahamas-500 hover:bg-bahamas-600 active:bg-bahamas-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 min-h-[52px]"
+              className="w-full py-3.5 sm:py-4 px-3 sm:px-6 bg-gradient-to-r from-bahamas-500 to-bahamas-600 hover:from-bahamas-600 hover:to-bahamas-700 active:bg-bahamas-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all shadow-glow hover:shadow-glow-lg flex items-center justify-center gap-1.5 sm:gap-2 text-center whitespace-nowrap min-h-[48px] sm:min-h-[52px]"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-4 h-4 shrink-0" />
               <span>Search Listings</span>
             </button>
 
             <a
               href="tel:2678580914"
-              className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white border border-white/30 font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl backdrop-blur-md transition-all flex items-center justify-center gap-2 min-h-[52px]"
+              className="w-full py-3.5 sm:py-4 px-3 sm:px-6 bg-slate-900/60 hover:bg-slate-900/80 active:bg-slate-950 text-white border border-white/30 font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl backdrop-blur-md transition-all flex items-center justify-center gap-1.5 sm:gap-2 text-center whitespace-nowrap min-h-[48px] sm:min-h-[52px]"
             >
-              <Phone className="w-4 h-4 text-bahamas-400" />
-              <span>Call Jeff (267) 858-0914</span>
+              <Phone className="w-4 h-4 text-bahamas-400 shrink-0" />
+              <span className="hidden sm:inline">Call (267) 858-0914</span>
+              <span className="sm:hidden">Call Jeff</span>
             </a>
           </div>
 
