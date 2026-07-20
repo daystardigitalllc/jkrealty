@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" fill="none">
+  <defs>
+    <!-- Silver Metallic Gradient for J -->
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="25%" stop-color="#94A3B8"/>
+      <stop offset="50%" stop-color="#CBD5E1"/>
+      <stop offset="75%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+
+    <!-- Bahamas Blue Gradient for Box -->
+    <linearGradient id="blueBoxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="40%" stop-color="#00A3E0"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Blue Background Box with K cut-out -->
+  <g filter="url(#shadow)">
+    <path d="M190 50 H420 C425.523 50 430 54.477 430 60 V340 C430 345.523 425.523 350 420 350 H190 V50 Z" fill="url(#blueBoxGrad)"/>
+    
+    <!-- White Cut-Out K inside Blue Box -->
+    <!-- Vertical stem of K -->
+    <path d="M190 50 V300 L240 240 V50 H190 Z" fill="#FFFFFF"/>
+    <path d="M190 50 H420 V300 H190 Z" fill="url(#blueBoxGrad)"/>
+
+    <!-- Re-drawn Crisp K inside Box -->
+    <path d="M190 50 L310 50 L190 175 V50 Z" fill="none"/>
+    
+    <!-- Crisp K Diagonal Strokes inside Blue Box -->
+    <!-- Top arm of K -->
+    <path d="M310 50 L190 175 L190 140 L280 50 H310 Z" fill="#FFFFFF"/>
+    <!-- Bottom leg of K -->
+    <path d="M230 135 L420 330 H360 L190 160 V130 L230 135 Z" fill="#FFFFFF"/>
+    
+    <!-- J. KRALOVEC Text inside bottom of blue box -->
+    <text x="195" y="335" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="28" fill="#FFFFFF" letter-spacing="1">
+      J. KRALOVEC
+    </text>
+  </g>
+
+  <!-- Metallic Silver J overlapping the left of blue box -->
+  <g filter="url(#shadow)">
+    <!-- Top Serifs of J -->
+    <path d="M97 50 H228 V60 H210 V340 C210 410 160 460 72 460 C35 460 10 440 0 420 L25 395 C35 410 52 422 75 422 C120 422 152 388 152 340 V60 H97 V50 Z" fill="url(#silverGrad)"/>
+  </g>
+
+  <!-- REALTY GROUP Text below blue box -->
+  <text x="190" y="420" font-family="'Playfair Display', Georgia, serif" font-weight="600" font-size="34" fill="#64748B" letter-spacing="2">
+    REALTY GROUP
+  </text>
+</svg>
