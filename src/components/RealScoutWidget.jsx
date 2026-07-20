@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Home, Building, Layers, Sparkles, Check, MapPin } from 'lucide-react';
+import { Home, Building, Layers, Sparkles, Check } from 'lucide-react';
 
 export default function RealScoutWidget({ 
   initialPropertyType = "SFR,MF,TC,LAL,MOBILE,OTHER", 
   title = "Featured Properties & MLS Listings",
-  stateFilter = null // "DE", "PA", "FL" or null for All
+  stateFilter = null
 }) {
   const [selectedType, setSelectedType] = useState(initialPropertyType);
   const [activeState, setActiveState] = useState(stateFilter);
@@ -25,53 +25,66 @@ export default function RealScoutWidget({
     { code: "FL", label: "Florida" },
   ];
 
-  // Client-Side DOM State Filter Engine for RealScout Listings
+  // Deep Shadow DOM Penetrating Filter Engine
   useEffect(() => {
-    if (!containerRef.current) return;
+    const applyStateFilter = () => {
+      if (!containerRef.current) return;
+      const widget = containerRef.current.querySelector('realscout-office-listings');
+      if (!widget) return;
 
-    const filterListingsByState = () => {
-      if (!activeState) {
-        // Show all if no state filter
-        const allCards = containerRef.current.querySelectorAll('*');
-        allCards.forEach((el) => {
-          if (el.style && el.dataset && el.dataset.hiddenByState) {
-            el.style.display = '';
-            delete el.dataset.hiddenByState;
+      // Collect all DOM roots (Shadow Root + Light DOM)
+      const roots = [];
+      if (widget.shadowRoot) roots.push(widget.shadowRoot);
+      roots.push(widget);
+      roots.push(containerRef.current);
+
+      roots.forEach((root) => {
+        // Query potential card elements inside RealScout widget
+        const elements = root.querySelectorAll('a, article, [class*="card"], [class*="listing"], [class*="item"]');
+
+        elements.forEach((el) => {
+          // Identify card boundary elements (elements that link to listings or have card classes)
+          const isCard = el.tagName === 'A' || el.tagName === 'ARTICLE' || (el.className && typeof el.className === 'string' && (el.className.includes('card') || el.className.includes('listing')));
+
+          if (isCard) {
+            const content = el.innerText || el.textContent || '';
+
+            if (activeState) {
+              // Keywords matching the state or key cities in that state
+              const deKeywords = 'DE|Delaware|Greenville|Wilmington|Claymont|Rehoboth|Lewes|Dewey';
+              const paKeywords = 'PA|Pennsylvania|Philadelphia|Philly|Main Line|Chester|Media|Radnor';
+              const flKeywords = 'FL|Florida|Palm Beach|Naples|Miami|Sarasota|Tampa';
+
+              const activeKeywords = activeState === 'DE' ? deKeywords : activeState === 'PA' ? paKeywords : flKeywords;
+              const regex = new RegExp(`\\b(${activeKeywords})\\b`, 'i');
+
+              if (!regex.test(content)) {
+                el.style.setProperty('display', 'none', 'important');
+              } else {
+                el.style.setProperty('display', '', '');
+              }
+            } else {
+              el.style.setProperty('display', '', '');
+            }
           }
         });
-        return;
-      }
-
-      // Query cards or listing items inside the RealScout component or container
-      const widget = containerRef.current.querySelector('realscout-office-listings');
-      const root = widget?.shadowRoot || containerRef.current;
-      
-      const cards = root.querySelectorAll('.listing-card, .rs-listing-card, [class*="card"], [class*="listing"], article, div > a');
-
-      cards.forEach((card) => {
-        const text = card.textContent || '';
-        const statePattern = new RegExp(`\\b(${activeState}|${activeState === 'DE' ? 'Delaware' : activeState === 'PA' ? 'Pennsylvania' : 'Florida'})\\b`, 'i');
-
-        if (text && !statePattern.test(text) && card.children.length > 0) {
-          card.style.display = 'none';
-          card.dataset.hiddenByState = 'true';
-        } else if (card.dataset && card.dataset.hiddenByState) {
-          card.style.display = '';
-          delete card.dataset.hiddenByState;
-        }
       });
     };
 
-    // Run filter immediately and set up observer for async RealScout DOM loads
-    filterListingsByState();
-    const interval = setInterval(filterListingsByState, 600);
-    
-    const observer = new MutationObserver(filterListingsByState);
-    observer.observe(containerRef.current, { childList: true, subtree: true });
+    // Run filter loop to catch dynamic rendering from RealScout script
+    applyStateFilter();
+    const interval = setInterval(applyStateFilter, 400);
+
+    let observer = null;
+    const widget = containerRef.current?.querySelector('realscout-office-listings');
+    if (widget?.shadowRoot) {
+      observer = new MutationObserver(applyStateFilter);
+      observer.observe(widget.shadowRoot, { childList: true, subtree: true });
+    }
 
     return () => {
       clearInterval(interval);
-      observer.disconnect();
+      if (observer) observer.disconnect();
     };
   }, [activeState, selectedType]);
 
@@ -81,8 +94,8 @@ export default function RealScoutWidget({
       <div className="absolute top-0 right-0 w-64 h-64 bg-bahamas-50 rounded-full blur-3xl -z-0 pointer-events-none" />
 
       <div className="relative z-10 space-y-4 sm:space-y-6">
-        {/* Header & Filter Pill Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-100">
+        {/* Header & Filter Controls */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-slate-100">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-bahamas-50 border border-bahamas-200 text-bahamas-700 text-[11px] font-bold uppercase tracking-wider mb-1.5">
               <Sparkles className="w-3.5 h-3.5 text-bahamas-500" />
@@ -93,19 +106,19 @@ export default function RealScoutWidget({
             </h3>
           </div>
 
-          {/* Quick Controls: State Selector + Category Pills */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+          {/* Filter Bar */}
+          <div className="flex flex-wrap items-center gap-2">
             
-            {/* State Filter Pills */}
+            {/* State Filter Buttons */}
             <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
               {states.map((st) => (
                 <button
                   key={st.label}
                   onClick={() => setActiveState(st.code)}
-                  className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all min-h-[36px] ${
                     activeState === st.code
                       ? 'bg-navy-900 text-white shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900'
+                      : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
                   }`}
                 >
                   {st.label}
@@ -113,8 +126,8 @@ export default function RealScoutWidget({
               ))}
             </div>
 
-            {/* Property Type Pills */}
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 pt-1 md:py-0 -mx-1 px-1">
+            {/* Property Type Buttons */}
+            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
               {categories.map((cat) => {
                 const Icon = cat.icon;
                 const isSelected = selectedType === cat.code;
@@ -122,7 +135,7 @@ export default function RealScoutWidget({
                   <button
                     key={cat.id}
                     onClick={() => setSelectedType(cat.code)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1 shrink-0 ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1 shrink-0 min-h-[36px] ${
                       isSelected
                         ? 'bg-bahamas-500 text-white shadow-glow'
                         : 'bg-slate-100 text-slate-700 hover:bg-bahamas-50 hover:text-bahamas-700 border border-slate-200/80'
