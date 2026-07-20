@@ -20,12 +20,14 @@ export default function Footer({ setCurrentPage, onOpenValuationModal }) {
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-5">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-bahamas-400 to-bahamas-600 flex items-center justify-center text-white font-display font-bold text-2xl shadow-glow">
-                JK
-              </div>
+              <img 
+                src="/logo.svg" 
+                alt="J. Kralovec Realty Group" 
+                className="h-14 w-auto bg-white/95 p-2 rounded-xl shadow-glow"
+              />
               <div>
-                <h3 className="font-display font-bold text-xl tracking-tight text-white">
-                  JEFF KRALOVEC
+                <h3 className="font-display font-bold text-lg tracking-tight text-white">
+                  J. KRALOVEC
                 </h3>
                 <p className="text-xs text-bahamas-400 font-semibold tracking-widest uppercase">
                   REALTY GROUP • COMPASS
@@ -177,7 +179,7 @@ export default function Footer({ setCurrentPage, onOpenValuationModal }) {
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-bahamas-400" />
             <span>
-              © {currentYear} Jeff Kralovec Realty Group | Compass. All Rights Reserved. Equal Housing Opportunity.
+              © {currentYear} J. Kralovec Realty Group | Compass. All Rights Reserved. Equal Housing Opportunity.
             </span>
           </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Menu, X, ChevronDown, Building2, Home, Sparkles } from 'lucide-react';
+import { Phone, Mail, MapPin, Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 
 export default function Header({ currentPage, setCurrentPage, onOpenListingModal, onOpenValuationModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,26 +57,23 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
       </div>
 
       {/* Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-        {/* Brand Logo */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        {/* Brand Official Logo */}
         <button 
           onClick={() => handleNavClick('home')}
-          className="flex items-center gap-3 text-left group focus:outline-none"
+          className="flex items-center gap-3 group focus:outline-none text-left"
         >
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-bahamas-500 to-bahamas-700 flex items-center justify-center text-white shadow-glow group-hover:scale-105 transition-transform duration-300">
-            <span className="font-display font-bold text-xl tracking-wider">JK</span>
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-display font-bold text-lg text-slate-900 tracking-tight leading-none group-hover:text-bahamas-600 transition-colors">
-                JEFF KRALOVEC
-              </span>
-              <span className="bg-slate-100 text-slate-600 text-[10px] uppercase tracking-wider font-semibold px-1.5 py-0.5 rounded border border-slate-200">
-                COMPASS
-              </span>
-            </div>
-            <span className="text-xs text-bahamas-600 font-semibold tracking-widest uppercase block mt-0.5">
-              REALTY GROUP
+          <img 
+            src="/logo.svg" 
+            alt="J. Kralovec Realty Group" 
+            className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="hidden sm:block border-l border-slate-200 pl-3">
+            <span className="bg-slate-900 text-white text-[10px] uppercase tracking-widest font-bold px-2 py-0.5 rounded border border-slate-700 block text-center">
+              COMPASS
+            </span>
+            <span className="text-[10px] text-bahamas-600 font-bold tracking-widest uppercase block mt-0.5">
+              TRI-STATE GROUP
             </span>
           </div>
         </button>
