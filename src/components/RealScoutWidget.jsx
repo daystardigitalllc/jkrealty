@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Home, Building, Layers, Sparkles, Check } from 'lucide-react';
 
 export default function RealScoutWidget({ 
   initialPropertyType = "SFR,MF,TC,LAL,MOBILE,OTHER", 
-  title = "Featured Properties & MLS Listings"
+  title = "Explore Live Tri-State MLS Listings"
 }) {
   const [selectedType, setSelectedType] = useState(initialPropertyType);
   const agentId = "QWdlbnQtNzQ1MjM=";
+
+  useEffect(() => {
+    if (initialPropertyType) {
+      setSelectedType(initialPropertyType);
+    }
+  }, [initialPropertyType]);
 
   const categories = [
     { id: "SFR,MF,TC,LAL,MOBILE,OTHER", label: "All Properties", icon: Home, code: "SFR,MF,TC,LAL,MOBILE,OTHER" },
@@ -15,8 +21,15 @@ export default function RealScoutWidget({
     { id: "MF", label: "Multi-Family", icon: Layers, code: "MF" },
   ];
 
+  const getDynamicTitle = () => {
+    if (selectedType === "SFR") return "Single Family Homes For Sale";
+    if (selectedType === "TC,MF") return "Condos & Townhomes For Sale";
+    if (selectedType === "MF") return "Multi-Family Properties For Sale";
+    return title;
+  };
+
   return (
-    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-card border border-bahamas-100 relative overflow-hidden">
+    <div id="mls-listings" className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-card border border-bahamas-100 relative overflow-hidden">
       {/* Background Subtle Accent */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-bahamas-50 rounded-full blur-3xl -z-0 pointer-events-none" />
 
@@ -29,7 +42,7 @@ export default function RealScoutWidget({
               Live MLS Feed
             </div>
             <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900">
-              {title}
+              {getDynamicTitle()}
             </h3>
           </div>
 

@@ -9,7 +9,7 @@ import SEO, { organizationSchema } from '../components/SEO';
 export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenValuationModal, onOpenContactModal }) {
   // Hero Floating Filter State
   const [selectedLocation, setSelectedLocation] = useState('DE');
-  const [selectedPropertyType, setSelectedPropertyType] = useState('SFR');
+  const [selectedPropertyType, setSelectedPropertyType] = useState('SFR,MF,TC,LAL,MOBILE,OTHER');
   const [selectedPriceRange, setSelectedPriceRange] = useState('500k-5m');
 
   // Testimonial Carousel State
@@ -49,7 +49,10 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    onOpenListingModal(selectedPropertyType);
+    const el = document.getElementById('mls-listings');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -127,9 +130,10 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
                     onChange={(e) => setSelectedPropertyType(e.target.value)}
                     className="bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer w-full"
                   >
-                    <option value="house">Single Family Residence</option>
-                    <option value="condo">Condos & Townhomes</option>
-                    <option value="mf">Multi-Family Estates</option>
+                    <option value="SFR,MF,TC,LAL,MOBILE,OTHER">All Property Types</option>
+                    <option value="SFR">Single Family Residence</option>
+                    <option value="TC,MF">Condos & Townhomes</option>
+                    <option value="MF">Multi-Family Estates</option>
                   </select>
                 </div>
               </div>
@@ -175,8 +179,7 @@ export default function HomePage({ setCurrentPage, onOpenListingModal, onOpenVal
       {/* ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <RealScoutWidget 
-          initialPropertyType="SFR,MF,TC,LAL,MOBILE,OTHER"
-          title="Explore Live Tri-State MLS Listings"
+          initialPropertyType={selectedPropertyType}
         />
       </section>
 
