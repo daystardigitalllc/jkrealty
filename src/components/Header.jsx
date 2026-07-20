@@ -76,7 +76,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
         </button>
 
         {/* Primary Desktop Nav with Nested Dropdowns */}
-        <nav className="hidden lg:flex items-center space-x-1 xl:space-x-3">
+        <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
           
           {/* 1. BUY DROPDOWN */}
           <div 
@@ -86,10 +86,10 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           >
             <button
               onClick={() => handleNavClick('listings')}
-              className={`px-3 py-2 text-sm sm:text-base uppercase tracking-[0.2em] font-cormorant font-normal transition-all duration-200 flex items-center gap-1 ${
+              className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 flex items-center gap-1 ${
                 currentPage === 'listings' || activeDropdown === 'buy'
-                  ? 'text-bahamas-600 font-semibold border-b-2 border-bahamas-500'
-                  : 'text-slate-950 hover:text-bahamas-600'
+                  ? 'text-bahamas-600 font-bold border-b-2 border-bahamas-500'
+                  : 'text-slate-800 hover:text-bahamas-600'
               }`}
             >
               Buy
@@ -155,10 +155,10 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           >
             <button
               onClick={onOpenValuationModal}
-              className={`px-3 py-2 text-sm sm:text-base uppercase tracking-[0.2em] font-cormorant font-normal transition-all duration-200 flex items-center gap-1 ${
+              className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 flex items-center gap-1 ${
                 activeDropdown === 'sell'
-                  ? 'text-bahamas-600 font-semibold border-b-2 border-bahamas-500'
-                  : 'text-slate-950 hover:text-bahamas-600'
+                  ? 'text-bahamas-600 font-bold border-b-2 border-bahamas-500'
+                  : 'text-slate-800 hover:text-bahamas-600'
               }`}
             >
               Sell
@@ -210,10 +210,10 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           >
             <button
               onClick={() => handleNavClick('delaware')}
-              className={`px-3 py-2 text-sm sm:text-base uppercase tracking-[0.2em] font-cormorant font-normal transition-all duration-200 flex items-center gap-1 ${
+              className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 flex items-center gap-1 ${
                 ['delaware', 'pennsylvania', 'florida'].includes(currentPage) || activeDropdown === 'markets'
-                  ? 'text-bahamas-600 font-semibold border-b-2 border-bahamas-500'
-                  : 'text-slate-950 hover:text-bahamas-600'
+                  ? 'text-bahamas-600 font-bold border-b-2 border-bahamas-500'
+                  : 'text-slate-800 hover:text-bahamas-600'
               }`}
             >
               Locations
@@ -269,10 +269,10 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           {/* 4. ABOUT */}
           <button
             onClick={() => handleNavClick('about')}
-            className={`px-3 py-2 text-sm sm:text-base uppercase tracking-[0.2em] font-cormorant font-normal transition-all duration-200 ${
+            className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 ${
               currentPage === 'about'
-                ? 'text-bahamas-600 font-semibold border-b-2 border-bahamas-500'
-                : 'text-slate-950 hover:text-bahamas-600'
+                ? 'text-bahamas-600 font-bold border-b-2 border-bahamas-500'
+                : 'text-slate-800 hover:text-bahamas-600'
             }`}
           >
             About
@@ -281,10 +281,10 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           {/* 5. AGENTS */}
           <button
             onClick={() => handleNavClick('agents')}
-            className={`px-3 py-2 text-sm sm:text-base uppercase tracking-[0.2em] font-cormorant font-normal transition-all duration-200 ${
+            className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 ${
               currentPage === 'agents'
-                ? 'text-bahamas-600 font-semibold border-b-2 border-bahamas-500'
-                : 'text-slate-950 hover:text-bahamas-600'
+                ? 'text-bahamas-600 font-bold border-b-2 border-bahamas-500'
+                : 'text-slate-800 hover:text-bahamas-600'
             }`}
           >
             Agents
@@ -293,10 +293,10 @@ export default function Header({ currentPage, setCurrentPage, onOpenListingModal
           {/* 6. CONTACT */}
           <button
             onClick={() => handleNavClick('contact')}
-            className={`px-3 py-2 text-sm sm:text-base uppercase tracking-[0.2em] font-cormorant font-normal transition-all duration-200 ${
+            className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all duration-200 ${
               currentPage === 'contact'
-                ? 'text-bahamas-600 font-semibold border-b-2 border-bahamas-500'
-                : 'text-slate-950 hover:text-bahamas-600'
+                ? 'text-bahamas-600 font-bold border-b-2 border-bahamas-500'
+                : 'text-slate-800 hover:text-bahamas-600'
             }`}
           >
             Contact
