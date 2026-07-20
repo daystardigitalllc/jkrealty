@@ -25,66 +25,80 @@ export default function RealScoutWidget({
     { code: "FL", label: "Florida" },
   ];
 
-  // Deep Shadow DOM Penetrating Filter Engine
+  // Precision RealScout Card Filter Engine
   useEffect(() => {
-    const applyStateFilter = () => {
+    const applyPrecisionStateFilter = () => {
       if (!containerRef.current) return;
       const widget = containerRef.current.querySelector('realscout-office-listings');
-      if (!widget) return;
 
-      // Collect all DOM roots (Shadow Root + Light DOM)
-      const roots = [];
-      if (widget.shadowRoot) roots.push(widget.shadowRoot);
-      roots.push(widget);
-      roots.push(containerRef.current);
+      // Recursively gather all nodes (including inner shadow DOMs or iframes)
+      const allNodes = [];
+      const collectNodes = (root) => {
+        if (!root) return;
+        try {
+          const els = root.querySelectorAll('*');
+          els.forEach((el) => {
+            allNodes.push(el);
+            if (el.shadowRoot) collectNodes(el.shadowRoot);
+          });
+        } catch (e) {
+          // Ignore inaccessible nodes
+        }
+      };
 
-      roots.forEach((root) => {
-        // Query potential card elements inside RealScout widget
-        const elements = root.querySelectorAll('a, article, [class*="card"], [class*="listing"], [class*="item"]');
+      if (widget?.shadowRoot) collectNodes(widget.shadowRoot);
+      collectNodes(containerRef.current);
 
-        elements.forEach((el) => {
-          // Identify card boundary elements (elements that link to listings or have card classes)
-          const isCard = el.tagName === 'A' || el.tagName === 'ARTICLE' || (el.className && typeof el.className === 'string' && (el.className.includes('card') || el.className.includes('listing')));
+      // Identify individual card containers by finding leaf elements containing property specs/address
+      allNodes.forEach((el) => {
+        const text = el.innerText || el.textContent || '';
+        
+        // Match elements that contain listing specs and state address text
+        const hasListingData = text.includes('Beds') && (text.includes(', DE') || text.includes(', PA') || text.includes(', FL') || text.includes('DE ') || text.includes('PA ') || text.includes('FL '));
 
-          if (isCard) {
-            const content = el.innerText || el.textContent || '';
-
-            if (activeState) {
-              // Keywords matching the state or key cities in that state
-              const deKeywords = 'DE|Delaware|Greenville|Wilmington|Claymont|Rehoboth|Lewes|Dewey';
-              const paKeywords = 'PA|Pennsylvania|Philadelphia|Philly|Main Line|Chester|Media|Radnor';
-              const flKeywords = 'FL|Florida|Palm Beach|Naples|Miami|Sarasota|Tampa';
-
-              const activeKeywords = activeState === 'DE' ? deKeywords : activeState === 'PA' ? paKeywords : flKeywords;
-              const regex = new RegExp(`\\b(${activeKeywords})\\b`, 'i');
-
-              if (!regex.test(content)) {
-                el.style.setProperty('display', 'none', 'important');
-              } else {
-                el.style.setProperty('display', '', '');
-              }
-            } else {
-              el.style.setProperty('display', '', '');
+        if (hasListingData) {
+          // Walk up to find the top-level single listing card container
+          let cardNode = el;
+          while (cardNode.parentElement && cardNode.parentElement !== containerRef.current) {
+            const parentText = cardNode.parentElement.innerText || cardNode.parentElement.textContent || '';
+            const bedsMatches = (parentText.match(/Beds/g) || []).length;
+            // If parent contains multiple cards (more than 1 'Beds'), stop at cardNode
+            if (bedsMatches > 1) {
+              break;
             }
+            cardNode = cardNode.parentElement;
           }
-        });
+
+          if (activeState) {
+            const deMatch = /,\s*DE\b|\bDE\s+\d{5}\b|\bDelaware\b|\b197\d{2}\b|\b198\d{2}\b|\b199\d{2}\b/i.test(text);
+            const paMatch = /,\s*PA\b|\bPA\s+\d{5}\b|\bPennsylvania\b|\b190\d{2}\b|\b191\d{2}\b|\b193\d{2}\b|\b194\d{2}\b/i.test(text);
+            const flMatch = /,\s*FL\b|\bFL\s+\d{5}\b|\bFlorida\b|\b32\d{3}\b|\b33\d{3}\b|\b34\d{3}\b/i.test(text);
+
+            let isMatch = false;
+            if (activeState === 'DE' && deMatch) isMatch = true;
+            if (activeState === 'PA' && paMatch) isMatch = true;
+            if (activeState === 'FL' && flMatch) isMatch = true;
+
+            if (!isMatch) {
+              cardNode.style.setProperty('display', 'none', 'important');
+              cardNode.dataset.stateFiltered = 'hidden';
+            } else {
+              cardNode.style.setProperty('display', '', '');
+              delete cardNode.dataset.stateFiltered;
+            }
+          } else {
+            cardNode.style.setProperty('display', '', '');
+            delete cardNode.dataset.stateFiltered;
+          }
+        }
       });
     };
 
-    // Run filter loop to catch dynamic rendering from RealScout script
-    applyStateFilter();
-    const interval = setInterval(applyStateFilter, 400);
-
-    let observer = null;
-    const widget = containerRef.current?.querySelector('realscout-office-listings');
-    if (widget?.shadowRoot) {
-      observer = new MutationObserver(applyStateFilter);
-      observer.observe(widget.shadowRoot, { childList: true, subtree: true });
-    }
+    applyPrecisionStateFilter();
+    const interval = setInterval(applyPrecisionStateFilter, 300);
 
     return () => {
       clearInterval(interval);
-      if (observer) observer.disconnect();
     };
   }, [activeState, selectedType]);
 
