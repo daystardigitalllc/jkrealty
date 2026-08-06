@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import ListingModal from './components/PropertyModal';
 import ValuationModal from './components/ValuationModal';
 import ContactModal from './components/ContactModal';
+import FloatingContactWidget from './components/FloatingContactWidget';
 
 import HomePage from './pages/HomePage';
 import DelawareStatePage from './pages/DelawareStatePage';
@@ -154,6 +155,8 @@ export default function App() {
         onClose={() => setContactModalOpen(false)}
         agentName={selectedAgentName}
       />
+
+      <FloatingContactWidget />
     </div>
   );
 }
