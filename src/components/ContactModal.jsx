@@ -18,15 +18,15 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
 
   const agentEmails = {
     "JEFF KRALOVEC": "jeff.kralovec@compass.com",
-    "CHARON HARRIS": "charon.harris@compass.com",
-    "AUSTIN ZEBROOK": "austin.zebrook@compass.com",
-    "PENNY ZEBROOK": "penny.zebrook@compass.com",
-    "BETH ANN KRALOVEC": "bethann.kralovec@compass.com",
+    "CHARON HARRIS": "jeff.kralovec@compass.com",
+    "AUSTIN ZEBROOK": "jeff.kralovec@compass.com",
+    "PENNY ZEBROOK": "jeff.kralovec@compass.com",
+    "BETH ANN KRALOVEC": "jeff.kralovec@compass.com",
   };
 
   const isRealAgent = Boolean(agentName && agentEmails[agentName.toUpperCase()]);
   const displayAgentName = isRealAgent ? agentName : null;
-  const targetAgentEmail = displayAgentName ? agentEmails[displayAgentName.toUpperCase()] : 'jeff.kralovec@compass.com';
+  const targetAgentEmail = "jeff.kralovec@compass.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();

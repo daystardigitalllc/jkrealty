@@ -38,6 +38,7 @@ export default function ValuationModal({ isOpen, onClose }) {
           access_key: "bf3ddb61-aeb5-4cba-b9d2-d795f8e2c32f",
           subject: `🏡 HOME VALUATION REQUEST: ${formData.propertyAddress}`,
           from_name: "JKRG Valuation Desk",
+          agent_email: "jeff.kralovec@compass.com",
           property_address: formData.propertyAddress,
           city_state_zip: formData.cityStateZip,
           property_type: formData.propertyType,

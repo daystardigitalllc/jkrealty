@@ -31,6 +31,7 @@ export default function ContactPage() {
           access_key: "bf3ddb61-aeb5-4cba-b9d2-d795f8e2c32f",
           subject: `Contact Page Inquiry: ${formData.subject} (${formData.market})`,
           from_name: "JKRG Contact Page",
+          agent_email: "jeff.kralovec@compass.com",
           client_name: formData.name,
           client_email: formData.email,
           client_phone: formData.phone,
