@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import { Phone, MessageSquare, X, HelpCircle } from 'lucide-react';
+import React from 'react';
+import { Phone, MessageSquare } from 'lucide-react';
 
 export default function FloatingContactWidget() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  if (!isOpen) return null;
-
   return (
     <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 animate-fade-in">
       <div className="relative flex items-center bg-slate-950/90 text-white rounded-full p-2 pr-4 shadow-2xl border border-white/10 backdrop-blur-md transition-all duration-300 hover:shadow-bahamas-500/20 group">
@@ -46,15 +42,6 @@ export default function FloatingContactWidget() {
             Text or Call
           </span>
         </div>
-
-        {/* Small Close Button */}
-        <button
-          onClick={() => setIsOpen(false)}
-          className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 flex items-center justify-center transition-colors border border-white/10 shadow-md"
-          aria-label="Dismiss Quick Contact"
-        >
-          <X className="w-3 h-3" />
-        </button>
       </div>
     </div>
   );
