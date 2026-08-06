@@ -29,7 +29,7 @@ export default function ContactPage() {
         },
         body: JSON.stringify({
           access_key: "3d6dc187-c197-4ee1-b3e0-8ef4ad4c0049",
-          subject: `Contact Page Inquiry: ${formData.subject} (${formData.market})`,
+          subject: `[JKRG Lead] Contact Page Inquiry: ${formData.subject} (${formData.market})`,
           from_name: "JKRG Contact Page",
           agent_email: "jeff.kralovec@compass.com",
           client_name: formData.name,

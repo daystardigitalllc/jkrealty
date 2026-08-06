@@ -42,7 +42,7 @@ export default function ContactModal({ isOpen, onClose, agentName = null }) {
         },
         body: JSON.stringify({
           access_key: "3d6dc187-c197-4ee1-b3e0-8ef4ad4c0049",
-          subject: displayAgentName ? `New Website Lead for ${displayAgentName}` : `New General Website Lead (${formData.topic})`,
+          subject: displayAgentName ? `[JKRG Lead] New Website Lead for ${displayAgentName}` : `[JKRG Lead] New General Website Lead (${formData.topic})`,
           from_name: "JKRG Realty Website",
           target_agent: displayAgentName || "General Advisory Desk",
           agent_email: targetAgentEmail,

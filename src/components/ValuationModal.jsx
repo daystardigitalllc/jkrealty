@@ -36,7 +36,7 @@ export default function ValuationModal({ isOpen, onClose }) {
         },
         body: JSON.stringify({
           access_key: "3d6dc187-c197-4ee1-b3e0-8ef4ad4c0049",
-          subject: `🏡 HOME VALUATION REQUEST: ${formData.propertyAddress}`,
+          subject: `[JKRG Lead] 🏡 HOME VALUATION REQUEST: ${formData.propertyAddress}`,
           from_name: "JKRG Valuation Desk",
           agent_email: "jeff.kralovec@compass.com",
           property_address: formData.propertyAddress,
